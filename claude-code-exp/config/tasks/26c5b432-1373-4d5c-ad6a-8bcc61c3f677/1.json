@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create metabase project structure",
+  "description": "Set up minimal Clojure project with proper directory structure for Metabase currency formatter",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

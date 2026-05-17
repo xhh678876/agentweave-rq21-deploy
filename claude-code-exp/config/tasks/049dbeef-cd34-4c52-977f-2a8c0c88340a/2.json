@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create tests/test_risk_metrics.py",
+  "description": "Create unit tests for risk metrics calculation, testing Sharpe, max drawdown, edge cases",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

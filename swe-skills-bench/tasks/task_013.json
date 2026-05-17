@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_fix",
+  "category": "swe_skills_bench",
+  "difficulty": "medium",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/upgradle\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Fix ESLint Violations in TypeScript Codebase\n\n## Background\n\nThe upgradle project uses TypeScript + ESLint for code quality enforcement. Currently, the `src/` directory contains multiple ESLint rule violations that need to be addressed:\n\n- `no-unused-vars`\n- `@typescript-eslint/no-explicit-any`\n- `eqeqeq` (strict equality)\n\n## Objective\n\nScan and fix all lint errors in `.ts` files under the `src/` directory to ensure the codebase passes linting checks.\n\n## Scope\n\n- **Files to modify**: `src/**/*.ts` (all TypeScript files in src directory)\n- **Files to preserve**: Do NOT modify any test files\n\n- **Repo requirements**: Ensure a `package.json` exists with `lint` and `test` scripts and a `src/` directory containing one or more `.ts` files so the test harness can run.\n\n## Requirements\n\n- Fix all ESLint error-level violations\n- Maintain existing functionality (all existing tests must continue to pass)\n- Follow TypeScript best practices\n- Replace `any` types with proper type definitions where possible\n- Use strict equality (`===`) instead of loose equality (`==`)\n- Remove or properly use unused variables\n\n## Acceptance Criteria\n\n- `npm run lint` exits with code 0 (no error-level reports)\n\n- No new lint warnings introduced\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/upgradle/.git ]; then cd /workspace/upgradle && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_fix",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Fix ESLint Violations in TypeScript Codebase\n\n## Background\n\nThe upgradle project uses TypeScript + ESLint for code quality enforcement. Currently, the `src/` directory contains multiple ESLint rule violations that need to be addressed:\n\n- `no-unused-vars`\n- `@typescript-eslint/no-explicit-any`\n- `eqeqeq` (strict equality)\n\n## Objective\n\nScan and fix all lint errors in `.ts` files under the `src/` directory to ensure the codebase passes linting checks.\n\n## Scope\n\n- **Files to modify**: `src/**/*.ts` (all TypeScript files in src directory)\n- **Files to preserve**: Do NOT modify any test files\n\n- **Repo requirements**: Ensure a `package.json` exists with `lint` and `test` scripts and a `src/` directory containing one or more `.ts` files so the test harness can run.\n\n## Requirements\n\n- Fix all ESLint error-level violations\n- Maintain existing functionality (all existing tests must continue to pass)\n- Follow TypeScript best practices\n- Replace `any` types with proper type definitions where possible\n- Use strict equality (`===`) instead of loose equality (`==`)\n- Remove or properly use unused variables\n\n## Acceptance Criteria\n\n- `npm run lint` exits with code 0 (no error-level reports)\n\n- No new lint warnings introduced\n",
+      "/workspace/.skill_id": "fix"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "fix",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/fix/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_fix.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Fix ESLint Violations in TypeScript Codebase\n\n## Background\n\nThe upgradle project uses TypeScript + ESLint for code quality enforcement. Currently, the `src/` directory contains multiple ESLint rule violations that need to be addressed:\n\n- `no-unused-vars`\n- `@typescript-eslint/no-explicit-any`\n- `eqeqeq` (strict equality)\n\n## Objective\n\nScan and fix all lint errors in `.ts` files under the `src/` directory to ensure the codebase passes linting checks.\n\n## Scope\n\n- **Files to modify**: `src/**/*.ts` (all TypeScript files in src directory)\n- **Files to preserve**: Do NOT modify any test files\n\n- **Repo requirements**: Ensure a `package.json` exists with `lint` and `test` scripts and a `src/` directory containing one or more `.ts` files so the test harness can run.\n\n## Requirements\n\n- Fix all ESLint error-level violations\n- Maintain existing functionality (all existing tests must continue to pass)\n- Follow TypeScript best practices\n- Replace `any` types with proper type definitions where possible\n- Use strict equality (`===`) instead of loose equality (`==`)\n- Remove or properly use unused variables\n\n## Acceptance Criteria\n\n- `npm run lint` exits with code 0 (no error-level reports)\n\n- No new lint warnings introduced\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "fix",
+    "name": "React Code Fix & Linter",
+    "type": "fix",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/michaelasper/upgradle",
+    "repo_commit": "5f292188e9b427a96d3573b29e5677e4cdce58ea",
+    "repo_root": "/workspace/upgradle",
+    "human_skill_path": "upstream/skills/fix/SKILL.md",
+    "sequence": 13
+  }
+}

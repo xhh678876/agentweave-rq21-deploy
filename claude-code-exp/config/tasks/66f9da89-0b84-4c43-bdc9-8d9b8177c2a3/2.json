@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create config.yaml with all required components",
+  "description": "Create the collector configuration with receivers (otlp, prometheus, jaeger), processors (batch, memory_limiter, attributes, filter), exporters (otlp, prometheus, logging), and pipelines (traces, metrics, logs)",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

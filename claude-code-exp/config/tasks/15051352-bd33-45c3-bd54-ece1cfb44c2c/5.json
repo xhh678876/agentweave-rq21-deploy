@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create .bazelrc with remote exec placeholders",
+  "description": "Create examples/python-bazel/.bazelrc with remote cache/executor placeholders, local dev settings, CI settings",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

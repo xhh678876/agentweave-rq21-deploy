@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create common_utils.sh with logging and helpers",
+  "description": "Create test/common_utils.sh with info/warn/error logging, error handling helpers, getopts argument parsing template",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

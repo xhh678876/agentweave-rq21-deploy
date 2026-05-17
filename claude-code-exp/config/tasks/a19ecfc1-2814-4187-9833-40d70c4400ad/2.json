@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create multi-job-prometheus.yml example file",
+  "description": "Create documentation/examples/multi-job-prometheus.yml with prometheus, node-exporter, and kubernetes-pods scrape jobs",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

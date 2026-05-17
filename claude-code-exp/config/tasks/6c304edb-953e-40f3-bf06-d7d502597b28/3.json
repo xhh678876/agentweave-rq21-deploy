@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Modify dataset.clj to integrate currency formatter",
+  "description": "Add currency formatting middleware calls to CSV and JSON export paths in the dataset API",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

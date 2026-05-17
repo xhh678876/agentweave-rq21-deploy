@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Clone OpenTelemetry Collector repository",
+  "description": "Clone the opentelemetry-collector repo into the workspace",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

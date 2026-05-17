@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Fix Dependency-Scanning.gitlab-ci.yml with proper extends and rules",
+  "description": "Add missing extends and rules fields to lib/gitlab/ci/templates/Security/Dependency-Scanning.gitlab-ci.yml",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

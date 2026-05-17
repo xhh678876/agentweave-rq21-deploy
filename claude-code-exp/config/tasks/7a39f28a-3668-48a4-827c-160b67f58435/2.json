@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create pipeline-demo example files",
+  "description": "Create the pipeline-demo config.yaml, README.md, and optional docker-compose.yaml",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

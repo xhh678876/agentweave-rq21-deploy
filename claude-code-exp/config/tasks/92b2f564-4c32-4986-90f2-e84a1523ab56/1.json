@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create demo_packaging.py script",
+  "description": "Create scripts/demo_packaging.py with version comparison, specifier filtering, wheel metadata parsing",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create WeightRecordRepository",
+  "description": "JPA repository with findByPetIdOrderByRecordDateDesc method",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

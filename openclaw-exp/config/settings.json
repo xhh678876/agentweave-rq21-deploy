@@ -1,0 +1,12 @@
+{
+  "model": "deepseek-v4-flash",
+  "permissions": {
+    "defaultMode": "default",
+    "allow": ["Bash", "Read", "Write", "Edit"],
+    "deny": []
+  },
+  "hooks": {},
+  "env": {
+    "AGENTWEAVE_EXP": "1"
+  }
+}

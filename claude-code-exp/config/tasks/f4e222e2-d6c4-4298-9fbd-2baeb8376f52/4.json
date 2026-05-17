@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Test the RAG demo",
+  "description": "Run the demo and verify it exits with code 0, includes retrieved context, and has source citations",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

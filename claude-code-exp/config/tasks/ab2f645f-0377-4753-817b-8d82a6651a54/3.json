@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create RAG demo script",
+  "description": "Create examples/rag_demo.py with full RAG pipeline",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Add weight_record DDL to schema.sql",
+  "description": "Add DROP TABLE and CREATE TABLE for weight_record in H2 schema.sql",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

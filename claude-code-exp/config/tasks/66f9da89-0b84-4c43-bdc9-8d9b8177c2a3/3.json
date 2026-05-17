@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Validate config.yaml with otelcol",
+  "description": "Run otelcol validate --config examples/pipeline-demo/config.yaml to verify the configuration is valid",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

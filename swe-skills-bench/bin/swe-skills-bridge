@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Wrapper around `python -m swe_skills_bridge.cli`.
+#
+# Strategy:
+#  - For pure-offline commands (build-tasks, list-tasks, install, show-skill,
+#    eval-trajectory) we can use this project's own .venv.
+#  - For commands that drive the LangGraph harness (run-one) we prefer the
+#    harness venv (which has langchain_core/langchain_openai installed) and
+#    layer this bridge's src/ on top via PYTHONPATH.
+#
+# Both modes layer the *other* directory onto PYTHONPATH so imports work
+# regardless of activation order.
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SUBCMD="${1:-}"
+
+prefer_harness_venv=0
+case "${SUBCMD}" in
+  run-one)
+    prefer_harness_venv=1
+    ;;
+esac
+
+HARNESS_VENV="${HOME}/agentweave/harness-exp-langgraph/.venv"
+HARNESS_SRC="${HOME}/agentweave/harness-exp-langgraph/src"
+SELF_VENV="${HERE}/.venv"
+SELF_SRC="${HERE}/src"
+
+# Auto-detect Docker socket — Python's docker SDK only checks the default UNIX
+# path unless DOCKER_HOST is exported. On macOS-with-colima the socket lives
+# under ~/.colima/.
+if [ -z "${DOCKER_HOST:-}" ]; then
+  if [ -S "${HOME}/.colima/default/docker.sock" ]; then
+    export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+  elif [ -S "${HOME}/.docker/run/docker.sock" ]; then
+    export DOCKER_HOST="unix://${HOME}/.docker/run/docker.sock"
+  fi
+fi
+
+if [ "${prefer_harness_venv}" -eq 1 ] && [ -f "${HARNESS_VENV}/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "${HARNESS_VENV}/bin/activate"
+  export PYTHONPATH="${SELF_SRC}${PYTHONPATH:+:${PYTHONPATH}}"
+elif [ -f "${SELF_VENV}/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "${SELF_VENV}/bin/activate"
+  if [ -d "${HARNESS_SRC}" ]; then
+    export PYTHONPATH="${HARNESS_SRC}${PYTHONPATH:+:${PYTHONPATH}}"
+  fi
+elif [ -f "${HARNESS_VENV}/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "${HARNESS_VENV}/bin/activate"
+  export PYTHONPATH="${SELF_SRC}${PYTHONPATH:+:${PYTHONPATH}}"
+fi
+
+exec python -m swe_skills_bridge.cli "$@"

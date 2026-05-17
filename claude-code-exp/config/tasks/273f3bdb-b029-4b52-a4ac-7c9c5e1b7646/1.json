@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create RAG demo files in examples/",
+  "description": "Create examples/rag_demo.py, examples/rag_config.yaml, sample documents, and README",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

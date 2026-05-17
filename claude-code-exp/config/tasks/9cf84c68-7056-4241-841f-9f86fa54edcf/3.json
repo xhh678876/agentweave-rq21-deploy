@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create batch capture tests",
+  "description": "Create posthog/tests/test_batch_capture.py with tests for valid batch, oversized batch, invalid events, and partial failure handling",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Add audit_logs table to schema.js",
+  "description": "Add audit_logs table definition to schema.js",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

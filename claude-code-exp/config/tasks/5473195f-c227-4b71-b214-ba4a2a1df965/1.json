@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Fix ESLint violations in greeter.ts",
+  "description": "Fix any types, == to ===, remove unused var",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

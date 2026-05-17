@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_xlsx",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/openpyxl\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Implement Sales Report Generation Engine for openpyxl\n\n## Background\n\nWe need to add a report generation engine to the openpyxl library that can produce Excel reports with automated summary formulas, conditional formatting, and trend charts.\n\n## Files to Create/Modify\n\n- `openpyxl/utils/report_engine.py` - Report generation engine (new)\n\n## Requirements\n\n### report_engine.py\n\nImplement a `generate_sales_report(data: List[Dict], output_path: str) -> None` function that:\n\n**Sheet1 - Raw Data with Summary:**\n- Write input data (list of dicts with month, product, amount) to cells\n- Insert `SUM` and `AVERAGE` formulas in a summary row at the bottom\n\n**Sheet2 - Conditional Formatting:**\n- Apply conditional formatting to the 'amount' column\n- Red background (`PatternFill` with `fgColor=FF0000`) for month-over-month decline > 10%\n\n**Sheet3 - Trend Chart:**\n- `LineChart` showing monthly sales trend\n- Proper axis labels and title\n\n### Additional Examples (in the same module or separate helper):\n- `BarChart` for category comparison\n- `PieChart` for distribution\n- Combined chart with secondary axis (optional)\n\n## Expected Functionality\n\n- Generated `.xlsx` files are valid (`load_workbook` succeeds)\n- Summary formulas compute correctly\n- Conditional formatting rules apply to correct cells\n- charts render with correct data ranges\n\n## Acceptance Criteria\n\n- `openpyxl/utils/report_engine.py` compiles without syntax errors\n- Generated Excel files are valid and contain all three sheets\n- Formulas, conditional formatting, and charts are properly configured\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/openpyxl/.git ]; then cd /workspace/openpyxl && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_xlsx",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Implement Sales Report Generation Engine for openpyxl\n\n## Background\n\nWe need to add a report generation engine to the openpyxl library that can produce Excel reports with automated summary formulas, conditional formatting, and trend charts.\n\n## Files to Create/Modify\n\n- `openpyxl/utils/report_engine.py` - Report generation engine (new)\n\n## Requirements\n\n### report_engine.py\n\nImplement a `generate_sales_report(data: List[Dict], output_path: str) -> None` function that:\n\n**Sheet1 - Raw Data with Summary:**\n- Write input data (list of dicts with month, product, amount) to cells\n- Insert `SUM` and `AVERAGE` formulas in a summary row at the bottom\n\n**Sheet2 - Conditional Formatting:**\n- Apply conditional formatting to the 'amount' column\n- Red background (`PatternFill` with `fgColor=FF0000`) for month-over-month decline > 10%\n\n**Sheet3 - Trend Chart:**\n- `LineChart` showing monthly sales trend\n- Proper axis labels and title\n\n### Additional Examples (in the same module or separate helper):\n- `BarChart` for category comparison\n- `PieChart` for distribution\n- Combined chart with secondary axis (optional)\n\n## Expected Functionality\n\n- Generated `.xlsx` files are valid (`load_workbook` succeeds)\n- Summary formulas compute correctly\n- Conditional formatting rules apply to correct cells\n- charts render with correct data ranges\n\n## Acceptance Criteria\n\n- `openpyxl/utils/report_engine.py` compiles without syntax errors\n- Generated Excel files are valid and contain all three sheets\n- Formulas, conditional formatting, and charts are properly configured\n",
+      "/workspace/.skill_id": "xlsx"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "xlsx",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/xlsx/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_xlsx.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Implement Sales Report Generation Engine for openpyxl\n\n## Background\n\nWe need to add a report generation engine to the openpyxl library that can produce Excel reports with automated summary formulas, conditional formatting, and trend charts.\n\n## Files to Create/Modify\n\n- `openpyxl/utils/report_engine.py` - Report generation engine (new)\n\n## Requirements\n\n### report_engine.py\n\nImplement a `generate_sales_report(data: List[Dict], output_path: str) -> None` function that:\n\n**Sheet1 - Raw Data with Summary:**\n- Write input data (list of dicts with month, product, amount) to cells\n- Insert `SUM` and `AVERAGE` formulas in a summary row at the bottom\n\n**Sheet2 - Conditional Formatting:**\n- Apply conditional formatting to the 'amount' column\n- Red background (`PatternFill` with `fgColor=FF0000`) for month-over-month decline > 10%\n\n**Sheet3 - Trend Chart:**\n- `LineChart` showing monthly sales trend\n- Proper axis labels and title\n\n### Additional Examples (in the same module or separate helper):\n- `BarChart` for category comparison\n- `PieChart` for distribution\n- Combined chart with secondary axis (optional)\n\n## Expected Functionality\n\n- Generated `.xlsx` files are valid (`load_workbook` succeeds)\n- Summary formulas compute correctly\n- Conditional formatting rules apply to correct cells\n- charts render with correct data ranges\n\n## Acceptance Criteria\n\n- `openpyxl/utils/report_engine.py` compiles without syntax errors\n- Generated Excel files are valid and contain all three sheets\n- Formulas, conditional formatting, and charts are properly configured\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "xlsx",
+    "name": "Excel & Spreadsheet Automation",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/ericgazoni/openpyxl",
+    "repo_commit": "c55988e4904d4337ce4c35ab8b7dc305bca9de23",
+    "repo_root": "/workspace/openpyxl",
+    "human_skill_path": "upstream/skills/xlsx/SKILL.md",
+    "sequence": 48
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_gitlab_ci_patterns",
+  "category": "swe_skills_bench",
+  "difficulty": "medium",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/gitlabhq\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Fix GitLab CI Security Pipeline Templates\n\n## Background\n\nThe existing GitLab CI security scanning templates under `lib/gitlab/ci/templates/Security/` have missing or incomplete `extends` and `rules` fields, causing them to fail validation. These templates need to be updated to conform to GitLab CI template standards.\n\n## Files to Modify\n\n- `lib/gitlab/ci/templates/Security/SAST.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Dependency-Scanning.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Secret-Detection.gitlab-ci.yml` - Fix missing extends/rules\n\n## Requirements\n\n### For each Security template:\n- Ensure every job definition includes `extends` referencing the correct base job (if applicable)\n- Add proper `rules` section with:\n  - CI pipeline trigger conditions\n  - Branch/merge request filtering\n  - `allow_failure` settings where appropriate\n- Ensure `stage` is set correctly (typically `test` or a security-specific stage)\n- `artifacts:reports` paths must be correctly configured for SARIF or JSON output\n- Template variables (`$SAST_EXCLUDED_PATHS`, `$DS_EXCLUDED_PATHS`, etc.) should have sensible defaults\n\n### Validation\n- All YAML files must be syntactically valid Ruby-parseable YAML\n- Template structure must follow GitLab CI syntax conventions\n\n## Acceptance Criteria\n\n- `lib/gitlab/ci/templates/Security/*.yml` files are valid YAML\n- Each security template contains proper `rules` and `extends` fields\n- Templates conform to GitLab CI pipeline syntax\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/gitlabhq/.git ]; then cd /workspace/gitlabhq && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_gitlab_ci_patterns",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Fix GitLab CI Security Pipeline Templates\n\n## Background\n\nThe existing GitLab CI security scanning templates under `lib/gitlab/ci/templates/Security/` have missing or incomplete `extends` and `rules` fields, causing them to fail validation. These templates need to be updated to conform to GitLab CI template standards.\n\n## Files to Modify\n\n- `lib/gitlab/ci/templates/Security/SAST.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Dependency-Scanning.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Secret-Detection.gitlab-ci.yml` - Fix missing extends/rules\n\n## Requirements\n\n### For each Security template:\n- Ensure every job definition includes `extends` referencing the correct base job (if applicable)\n- Add proper `rules` section with:\n  - CI pipeline trigger conditions\n  - Branch/merge request filtering\n  - `allow_failure` settings where appropriate\n- Ensure `stage` is set correctly (typically `test` or a security-specific stage)\n- `artifacts:reports` paths must be correctly configured for SARIF or JSON output\n- Template variables (`$SAST_EXCLUDED_PATHS`, `$DS_EXCLUDED_PATHS`, etc.) should have sensible defaults\n\n### Validation\n- All YAML files must be syntactically valid Ruby-parseable YAML\n- Template structure must follow GitLab CI syntax conventions\n\n## Acceptance Criteria\n\n- `lib/gitlab/ci/templates/Security/*.yml` files are valid YAML\n- Each security template contains proper `rules` and `extends` fields\n- Templates conform to GitLab CI pipeline syntax\n",
+      "/workspace/.skill_id": "gitlab-ci-patterns"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "gitlab-ci-patterns",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "human_skill_path": "upstream/skills/gitlab-ci-patterns/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_gitlab_ci_patterns.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Fix GitLab CI Security Pipeline Templates\n\n## Background\n\nThe existing GitLab CI security scanning templates under `lib/gitlab/ci/templates/Security/` have missing or incomplete `extends` and `rules` fields, causing them to fail validation. These templates need to be updated to conform to GitLab CI template standards.\n\n## Files to Modify\n\n- `lib/gitlab/ci/templates/Security/SAST.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Dependency-Scanning.gitlab-ci.yml` - Fix missing extends/rules\n- `lib/gitlab/ci/templates/Security/Secret-Detection.gitlab-ci.yml` - Fix missing extends/rules\n\n## Requirements\n\n### For each Security template:\n- Ensure every job definition includes `extends` referencing the correct base job (if applicable)\n- Add proper `rules` section with:\n  - CI pipeline trigger conditions\n  - Branch/merge request filtering\n  - `allow_failure` settings where appropriate\n- Ensure `stage` is set correctly (typically `test` or a security-specific stage)\n- `artifacts:reports` paths must be correctly configured for SARIF or JSON output\n- Template variables (`$SAST_EXCLUDED_PATHS`, `$DS_EXCLUDED_PATHS`, etc.) should have sensible defaults\n\n### Validation\n- All YAML files must be syntactically valid Ruby-parseable YAML\n- Template structure must follow GitLab CI syntax conventions\n\n## Acceptance Criteria\n\n- `lib/gitlab/ci/templates/Security/*.yml` files are valid YAML\n- Each security template contains proper `rules` and `extends` fields\n- Templates conform to GitLab CI pipeline syntax\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "gitlab-ci-patterns",
+    "name": "GitLab CI Patterns",
+    "type": "fix",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "repo_url": "https://github.com/gitlabhq/gitlabhq",
+    "repo_commit": "d91b0b33f4c63b5f4b7307059a9b70d9b82a7b41",
+    "repo_root": "/workspace/gitlabhq",
+    "human_skill_path": "upstream/skills/gitlab-ci-patterns/SKILL.md",
+    "sequence": 15
+  }
+}

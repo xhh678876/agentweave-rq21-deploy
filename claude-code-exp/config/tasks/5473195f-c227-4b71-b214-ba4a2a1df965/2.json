@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Fix ESLint violations in calculator.ts",
+  "description": "Fix == to ===, any types, remove unused param",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

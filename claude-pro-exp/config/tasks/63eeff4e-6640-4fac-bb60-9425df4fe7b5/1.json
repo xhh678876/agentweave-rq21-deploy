@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create cpu_bound.py profiling demo",
+  "description": "Create examples/profiling_targets/cpu_bound.py with recursive Fibonacci, matrix multiplication, string processing, and clear hotspot functions",
+  "activeForm": "Creating cpu_bound.py",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

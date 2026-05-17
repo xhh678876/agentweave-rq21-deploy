@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Add REST endpoints to OwnerController",
+  "description": "POST and GET endpoints for weight tracking with proper validation",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

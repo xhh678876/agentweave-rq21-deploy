@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create sample documents for RAG demo",
+  "description": "Create sample text files in examples/data/ directory",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

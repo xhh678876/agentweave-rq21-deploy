@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Create io_bound.py profiling demo",
+  "description": "Create examples/profiling_targets/io_bound.py with file operations, sleep simulation, network calls, threading/async patterns",
+  "activeForm": "Creating io_bound.py",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

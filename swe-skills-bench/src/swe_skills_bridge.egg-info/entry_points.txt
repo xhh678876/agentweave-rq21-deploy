@@ -1,0 +1,2 @@
+[console_scripts]
+swe-skills-bridge = swe_skills_bridge.cli:cli

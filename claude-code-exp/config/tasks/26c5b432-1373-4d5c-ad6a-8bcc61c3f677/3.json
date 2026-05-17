@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create currency_formatter_test.clj tests",
+  "description": "Write comprehensive tests for currency formatter in test/metabase/query_processor/middleware/currency_formatter_test.clj",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

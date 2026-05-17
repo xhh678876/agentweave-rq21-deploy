@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_springboot_tdd",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/spring-petclinic\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Pet Weight Tracking Feature to PetClinic\n\n## Background\n\nWe need to add a weight tracking feature to the Spring PetClinic application. Pet owners should be able to record and view their pets' weight history over time.\n\n## Files to Create/Modify\n\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecord.java` - Entity class\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecordRepository.java` - Data access\n- `src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java` - REST endpoints\n- `src/main/resources/db/h2/` - DDL for weight_record table\n\n## Requirements\n\n### Entity (WeightRecord.java)\n\n- `id`: Long (Primary Key)\n- `petId`: Long (Foreign Key to Pet)\n- `weightKg`: Double (Required, positive value)\n- `recordDate`: LocalDate\n\n### Repository\n\n- Extend `JpaRepository<WeightRecord, Long>`\n- Method: `findByPetIdOrderByRecordDateDesc(Long petId)`\n\n### Controller Endpoints\n\n- `POST /owners/{ownerId}/pets/{petId}/weight` - Record new weight\n- `GET /owners/{ownerId}/pets/{petId}/weight/history` - Get weight history\n\n### Database\n\n- Create DDL in `src/main/resources/db/h2/`\n\n## Expected Functionality\n\n1. Successfully record pet weight → returns 201 Created\n2. Reject invalid petId → returns 404 Not Found\n3. Reject missing weightKg field → returns 400 Bad Request\n4. Weight history returns list ordered by date (newest first)\n\n## Acceptance Criteria\n\n- Application compiles without errors: `./mvnw compile`\n- All CRUD operations work correctly\n- Endpoints handle edge cases appropriately (invalid input, missing data)\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-jvm:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/spring-petclinic/.git ]; then cd /workspace/spring-petclinic && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_springboot_tdd",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Pet Weight Tracking Feature to PetClinic\n\n## Background\n\nWe need to add a weight tracking feature to the Spring PetClinic application. Pet owners should be able to record and view their pets' weight history over time.\n\n## Files to Create/Modify\n\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecord.java` - Entity class\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecordRepository.java` - Data access\n- `src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java` - REST endpoints\n- `src/main/resources/db/h2/` - DDL for weight_record table\n\n## Requirements\n\n### Entity (WeightRecord.java)\n\n- `id`: Long (Primary Key)\n- `petId`: Long (Foreign Key to Pet)\n- `weightKg`: Double (Required, positive value)\n- `recordDate`: LocalDate\n\n### Repository\n\n- Extend `JpaRepository<WeightRecord, Long>`\n- Method: `findByPetIdOrderByRecordDateDesc(Long petId)`\n\n### Controller Endpoints\n\n- `POST /owners/{ownerId}/pets/{petId}/weight` - Record new weight\n- `GET /owners/{ownerId}/pets/{petId}/weight/history` - Get weight history\n\n### Database\n\n- Create DDL in `src/main/resources/db/h2/`\n\n## Expected Functionality\n\n1. Successfully record pet weight → returns 201 Created\n2. Reject invalid petId → returns 404 Not Found\n3. Reject missing weightKg field → returns 400 Bad Request\n4. Weight history returns list ordered by date (newest first)\n\n## Acceptance Criteria\n\n- Application compiles without errors: `./mvnw compile`\n- All CRUD operations work correctly\n- Endpoints handle edge cases appropriately (invalid input, missing data)\n",
+      "/workspace/.skill_id": "springboot-tdd"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "springboot-tdd",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-jvm:latest",
+    "human_skill_path": "upstream/skills/springboot-tdd/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_springboot_tdd.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Pet Weight Tracking Feature to PetClinic\n\n## Background\n\nWe need to add a weight tracking feature to the Spring PetClinic application. Pet owners should be able to record and view their pets' weight history over time.\n\n## Files to Create/Modify\n\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecord.java` - Entity class\n- `src/main/java/org/springframework/samples/petclinic/owner/WeightRecordRepository.java` - Data access\n- `src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java` - REST endpoints\n- `src/main/resources/db/h2/` - DDL for weight_record table\n\n## Requirements\n\n### Entity (WeightRecord.java)\n\n- `id`: Long (Primary Key)\n- `petId`: Long (Foreign Key to Pet)\n- `weightKg`: Double (Required, positive value)\n- `recordDate`: LocalDate\n\n### Repository\n\n- Extend `JpaRepository<WeightRecord, Long>`\n- Method: `findByPetIdOrderByRecordDateDesc(Long petId)`\n\n### Controller Endpoints\n\n- `POST /owners/{ownerId}/pets/{petId}/weight` - Record new weight\n- `GET /owners/{ownerId}/pets/{petId}/weight/history` - Get weight history\n\n### Database\n\n- Create DDL in `src/main/resources/db/h2/`\n\n## Expected Functionality\n\n1. Successfully record pet weight → returns 201 Created\n2. Reject invalid petId → returns 404 Not Found\n3. Reject missing weightKg field → returns 400 Bad Request\n4. Weight history returns list ordered by date (newest first)\n\n## Acceptance Criteria\n\n- Application compiles without errors: `./mvnw compile`\n- All CRUD operations work correctly\n- Endpoints handle edge cases appropriately (invalid input, missing data)\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "springboot-tdd",
+    "name": "Spring Boot TDD",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-jvm:latest",
+    "repo_url": "https://github.com/spring-projects/spring-petclinic",
+    "repo_commit": "edf4db28affcc4741c79850a3d95bc3f177b5ff9",
+    "repo_root": "/workspace/spring-petclinic",
+    "human_skill_path": "upstream/skills/springboot-tdd/SKILL.md",
+    "sequence": 43
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Clone gitlabhq repo and set up workspace",
+  "description": "Clone https://github.com/gitlabhq/gitlabhq at commit d91b0b33f4c63b5f4b7307059a9b70d9b82a7b41 into the Docker container at /workspace/gitlabhq",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

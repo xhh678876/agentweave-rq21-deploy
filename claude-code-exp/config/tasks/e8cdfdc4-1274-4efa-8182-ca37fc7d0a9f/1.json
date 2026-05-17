@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create benchmarks/configs/benchmark_config.yaml",
+  "description": "Configuration file with batch_sizes, seq_lengths, head_dim, num_heads, dtype parameters",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

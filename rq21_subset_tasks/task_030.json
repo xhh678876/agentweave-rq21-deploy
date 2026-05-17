@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_python_background_jobs",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/celery\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Design Video Transcoding Task System with Celery\n\n## Background\n   Design a video transcoding task system based on Celery's Task base class,\n   implementing proper task chaining, state updates, and retry logic.\n\n## Files to Create/Modify\n   - examples/transcoding/tasks.py\n   - examples/transcoding/workflow.py\n   - t/unit/tasks/test_transcoding.py\n\n## Requirements\n   \n   Tasks to Implement (in tasks.py):\n   \n   1) extract_audio:\n      - bind=True (access to self)\n      - Call self.update_state to report EXTRACTING status\n   \n   2) transcode_video:\n      - Support meta={'progress': pct} for percentage progress\n      - Implement self.retry on failure\n      - Max 3 retries, countdown=60\n   \n   3) generate_thumbnail:\n      - Generate thumbnail from video frame\n   \n   Workflow (in workflow.py):\n   - Use chain() to compose: extract_audio.s() | transcode_video.s() | generate_thumbnail.s()\n   - Proper signature passing between tasks\n\n4. Test Cases (CELERY_TASK_ALWAYS_EAGER=True):\n   - Retry logic (mock transcode failure, verify retry called)\n   - Progress reporting assertions\n   - Chain execution returns correct final result\n   - State updates are recorded\n\n## Acceptance Criteria\n\n   - All three tasks implemented\n   - Chain workflow correctly orchestrates tasks\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/celery/.git ]; then cd /workspace/celery && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_python_background_jobs",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Design Video Transcoding Task System with Celery\n\n## Background\n   Design a video transcoding task system based on Celery's Task base class,\n   implementing proper task chaining, state updates, and retry logic.\n\n## Files to Create/Modify\n   - examples/transcoding/tasks.py\n   - examples/transcoding/workflow.py\n   - t/unit/tasks/test_transcoding.py\n\n## Requirements\n   \n   Tasks to Implement (in tasks.py):\n   \n   1) extract_audio:\n      - bind=True (access to self)\n      - Call self.update_state to report EXTRACTING status\n   \n   2) transcode_video:\n      - Support meta={'progress': pct} for percentage progress\n      - Implement self.retry on failure\n      - Max 3 retries, countdown=60\n   \n   3) generate_thumbnail:\n      - Generate thumbnail from video frame\n   \n   Workflow (in workflow.py):\n   - Use chain() to compose: extract_audio.s() | transcode_video.s() | generate_thumbnail.s()\n   - Proper signature passing between tasks\n\n4. Test Cases (CELERY_TASK_ALWAYS_EAGER=True):\n   - Retry logic (mock transcode failure, verify retry called)\n   - Progress reporting assertions\n   - Chain execution returns correct final result\n   - State updates are recorded\n\n## Acceptance Criteria\n\n   - All three tasks implemented\n   - Chain workflow correctly orchestrates tasks\n",
+      "/workspace/.skill_id": "python-background-jobs"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "python-background-jobs",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/python-background-jobs/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_python_background_jobs.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Design Video Transcoding Task System with Celery\n\n## Background\n   Design a video transcoding task system based on Celery's Task base class,\n   implementing proper task chaining, state updates, and retry logic.\n\n## Files to Create/Modify\n   - examples/transcoding/tasks.py\n   - examples/transcoding/workflow.py\n   - t/unit/tasks/test_transcoding.py\n\n## Requirements\n   \n   Tasks to Implement (in tasks.py):\n   \n   1) extract_audio:\n      - bind=True (access to self)\n      - Call self.update_state to report EXTRACTING status\n   \n   2) transcode_video:\n      - Support meta={'progress': pct} for percentage progress\n      - Implement self.retry on failure\n      - Max 3 retries, countdown=60\n   \n   3) generate_thumbnail:\n      - Generate thumbnail from video frame\n   \n   Workflow (in workflow.py):\n   - Use chain() to compose: extract_audio.s() | transcode_video.s() | generate_thumbnail.s()\n   - Proper signature passing between tasks\n\n4. Test Cases (CELERY_TASK_ALWAYS_EAGER=True):\n   - Retry logic (mock transcode failure, verify retry called)\n   - Progress reporting assertions\n   - Chain execution returns correct final result\n   - State updates are recorded\n\n## Acceptance Criteria\n\n   - All three tasks implemented\n   - Chain workflow correctly orchestrates tasks\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "python-background-jobs",
+    "name": "Python Background Jobs",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/celery/celery",
+    "repo_commit": "c38600d429eb0d457ce57ae4ec6b52fe9e40a28d",
+    "repo_root": "/workspace/celery",
+    "human_skill_path": "upstream/skills/python-background-jobs/SKILL.md",
+    "sequence": 30
+  }
+}

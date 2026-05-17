@@ -1,0 +1,10 @@
+{
+  "id": "4",
+  "subject": "Create benchmark attention script",
+  "description": "Create benchmarks/benchmark_attention.py with flash attention vs standard attention comparison",
+  "status": "completed",
+  "blocks": [
+    "3"
+  ],
+  "blockedBy": []
+}

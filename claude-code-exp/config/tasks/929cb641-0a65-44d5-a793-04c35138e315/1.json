@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create DCFValuation example directory and files",
+  "description": "Create Examples/DCFValuation/ with DCFDemo.cpp, CMakeLists.txt, and README.md demonstrating DCF valuation using QuantLib",
+  "activeForm": "Creating DCFValuation example files",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

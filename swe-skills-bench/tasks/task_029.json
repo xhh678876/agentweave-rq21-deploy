@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_python_anti_patterns",
+  "category": "swe_skills_bench",
+  "difficulty": "medium",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/boltons\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Refactor boltons Core Modules to Modern Python Patterns\n\n## Background\n\nThe `boltons/iterutils.py` and `boltons/strutils.py` modules contain legacy Python patterns that should be modernized to Python 3.9+ idioms while maintaining backward compatibility.\n\n## Files to Modify\n\n- `boltons/iterutils.py` - Refactor to modern Python patterns\n- `boltons/strutils.py` - Refactor to modern Python patterns\n\n## Requirements\n\n### iterutils.py Improvements\n- Replace old-style `str.format()` calls with f-strings where applicable\n- Replace manual type checks (`type(x) == ...`) with `isinstance()` calls\n- Use walrus operator (`:=`) where it simplifies assignments in conditionals\n- Replace `dict()` calls with dict literals `{}`\n- Use modern `dict | dict` union operator where merging dicts (Python 3.9+)\n\n### strutils.py Improvements\n- Convert `str.format()` to f-string formatting\n- Replace bare `except:` clauses with explicit exception types\n- Use `isinstance()` for type guards instead of `type() ==`\n- Simplify comprehensions where possible (avoid unnecessary list wrapping)\n- Use generator expressions instead of list comprehensions for memory efficiency where the list is not reused\n\n### Constraints\n- All existing tests must continue to pass\n- Do not change public API signatures\n- Maintain backward compatibility with Python 3.9+\n\n## Acceptance Criteria\n\n- `boltons/iterutils.py` and `boltons/strutils.py` compile without syntax errors\n- All modernization changes follow PEP 8 and Python 3.9+ conventions\n- Existing functionality is preserved\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/boltons/.git ]; then cd /workspace/boltons && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_python_anti_patterns",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Refactor boltons Core Modules to Modern Python Patterns\n\n## Background\n\nThe `boltons/iterutils.py` and `boltons/strutils.py` modules contain legacy Python patterns that should be modernized to Python 3.9+ idioms while maintaining backward compatibility.\n\n## Files to Modify\n\n- `boltons/iterutils.py` - Refactor to modern Python patterns\n- `boltons/strutils.py` - Refactor to modern Python patterns\n\n## Requirements\n\n### iterutils.py Improvements\n- Replace old-style `str.format()` calls with f-strings where applicable\n- Replace manual type checks (`type(x) == ...`) with `isinstance()` calls\n- Use walrus operator (`:=`) where it simplifies assignments in conditionals\n- Replace `dict()` calls with dict literals `{}`\n- Use modern `dict | dict` union operator where merging dicts (Python 3.9+)\n\n### strutils.py Improvements\n- Convert `str.format()` to f-string formatting\n- Replace bare `except:` clauses with explicit exception types\n- Use `isinstance()` for type guards instead of `type() ==`\n- Simplify comprehensions where possible (avoid unnecessary list wrapping)\n- Use generator expressions instead of list comprehensions for memory efficiency where the list is not reused\n\n### Constraints\n- All existing tests must continue to pass\n- Do not change public API signatures\n- Maintain backward compatibility with Python 3.9+\n\n## Acceptance Criteria\n\n- `boltons/iterutils.py` and `boltons/strutils.py` compile without syntax errors\n- All modernization changes follow PEP 8 and Python 3.9+ conventions\n- Existing functionality is preserved\n",
+      "/workspace/.skill_id": "python-anti-patterns"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "python-anti-patterns",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/python-anti-patterns/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_python_anti_patterns.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Refactor boltons Core Modules to Modern Python Patterns\n\n## Background\n\nThe `boltons/iterutils.py` and `boltons/strutils.py` modules contain legacy Python patterns that should be modernized to Python 3.9+ idioms while maintaining backward compatibility.\n\n## Files to Modify\n\n- `boltons/iterutils.py` - Refactor to modern Python patterns\n- `boltons/strutils.py` - Refactor to modern Python patterns\n\n## Requirements\n\n### iterutils.py Improvements\n- Replace old-style `str.format()` calls with f-strings where applicable\n- Replace manual type checks (`type(x) == ...`) with `isinstance()` calls\n- Use walrus operator (`:=`) where it simplifies assignments in conditionals\n- Replace `dict()` calls with dict literals `{}`\n- Use modern `dict | dict` union operator where merging dicts (Python 3.9+)\n\n### strutils.py Improvements\n- Convert `str.format()` to f-string formatting\n- Replace bare `except:` clauses with explicit exception types\n- Use `isinstance()` for type guards instead of `type() ==`\n- Simplify comprehensions where possible (avoid unnecessary list wrapping)\n- Use generator expressions instead of list comprehensions for memory efficiency where the list is not reused\n\n### Constraints\n- All existing tests must continue to pass\n- Do not change public API signatures\n- Maintain backward compatibility with Python 3.9+\n\n## Acceptance Criteria\n\n- `boltons/iterutils.py` and `boltons/strutils.py` compile without syntax errors\n- All modernization changes follow PEP 8 and Python 3.9+ conventions\n- Existing functionality is preserved\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "python-anti-patterns",
+    "name": "Python Anti-Pattern Review",
+    "type": "refactor",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/mahmoud/boltons",
+    "repo_commit": "207651ee6055aabd0d9cdeac2e00140cdc208d44",
+    "repo_root": "/workspace/boltons",
+    "human_skill_path": "upstream/skills/python-anti-patterns/SKILL.md",
+    "sequence": 29
+  }
+}

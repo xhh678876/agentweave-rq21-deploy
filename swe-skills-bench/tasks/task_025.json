@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_mcp_builder",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/servers\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Build MCP Server for Markdown Knowledge Base with SQLite\n\n## Background\n\nWe need to create a hybrid MCP (Model Context Protocol) server using TypeScript and `@modelcontextprotocol/sdk` that connects a local Markdown knowledge base with a SQLite metadata database.\n\n## Files to Create/Modify\n\n- `src/markdown-sqlite/index.ts` - Main server implementation\n- `src/markdown-sqlite/package.json` - Package configuration\n- `src/markdown-sqlite/tests/index.test.ts` - Unit tests\n\n## Requirements\n\n### Tools to Implement\n\n**1. index_markdown(dir_path: string)**\n- Scan all `.md` files in specified directory\n- Extract: file path, first-level heading, tags (from YAML front-matter)\n- Write to SQLite table `documents`\n\n**2. search_documents(query: string)**\n- Use SQLite FTS5 full-text search\n- Return matching document summaries: id, title, snippet\n\n**3. read_document(doc_id: number)**\n- Return complete Markdown content of specified document\n\n### Package Configuration\n\n- TypeScript compilation with `@modelcontextprotocol/sdk`\n- `\"build\"` script for compilation\n- `\"test\"` script for running tests\n\n### SQLite Schema\n\n```sql\nCREATE VIRTUAL TABLE documents USING fts5(\n  path, title, tags, content\n);\n```\n\n### Expected Functionality\n\n- `index_markdown` successfully indexes all markdown files in directory\n- `search_documents` returns relevant results matching the query\n- `read_document` returns complete and correct markdown content\n- Graceful error handling for non-existent file paths\n\n## Acceptance Criteria\n\n- `cd src/markdown-sqlite && npm run build` compiles without errors\n- All three MCP tools work as specified\n- Error cases are handled appropriately\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/servers/.git ]; then cd /workspace/servers && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_mcp_builder",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Build MCP Server for Markdown Knowledge Base with SQLite\n\n## Background\n\nWe need to create a hybrid MCP (Model Context Protocol) server using TypeScript and `@modelcontextprotocol/sdk` that connects a local Markdown knowledge base with a SQLite metadata database.\n\n## Files to Create/Modify\n\n- `src/markdown-sqlite/index.ts` - Main server implementation\n- `src/markdown-sqlite/package.json` - Package configuration\n- `src/markdown-sqlite/tests/index.test.ts` - Unit tests\n\n## Requirements\n\n### Tools to Implement\n\n**1. index_markdown(dir_path: string)**\n- Scan all `.md` files in specified directory\n- Extract: file path, first-level heading, tags (from YAML front-matter)\n- Write to SQLite table `documents`\n\n**2. search_documents(query: string)**\n- Use SQLite FTS5 full-text search\n- Return matching document summaries: id, title, snippet\n\n**3. read_document(doc_id: number)**\n- Return complete Markdown content of specified document\n\n### Package Configuration\n\n- TypeScript compilation with `@modelcontextprotocol/sdk`\n- `\"build\"` script for compilation\n- `\"test\"` script for running tests\n\n### SQLite Schema\n\n```sql\nCREATE VIRTUAL TABLE documents USING fts5(\n  path, title, tags, content\n);\n```\n\n### Expected Functionality\n\n- `index_markdown` successfully indexes all markdown files in directory\n- `search_documents` returns relevant results matching the query\n- `read_document` returns complete and correct markdown content\n- Graceful error handling for non-existent file paths\n\n## Acceptance Criteria\n\n- `cd src/markdown-sqlite && npm run build` compiles without errors\n- All three MCP tools work as specified\n- Error cases are handled appropriately\n",
+      "/workspace/.skill_id": "mcp-builder"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "mcp-builder",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/mcp-builder/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_mcp_builder.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Build MCP Server for Markdown Knowledge Base with SQLite\n\n## Background\n\nWe need to create a hybrid MCP (Model Context Protocol) server using TypeScript and `@modelcontextprotocol/sdk` that connects a local Markdown knowledge base with a SQLite metadata database.\n\n## Files to Create/Modify\n\n- `src/markdown-sqlite/index.ts` - Main server implementation\n- `src/markdown-sqlite/package.json` - Package configuration\n- `src/markdown-sqlite/tests/index.test.ts` - Unit tests\n\n## Requirements\n\n### Tools to Implement\n\n**1. index_markdown(dir_path: string)**\n- Scan all `.md` files in specified directory\n- Extract: file path, first-level heading, tags (from YAML front-matter)\n- Write to SQLite table `documents`\n\n**2. search_documents(query: string)**\n- Use SQLite FTS5 full-text search\n- Return matching document summaries: id, title, snippet\n\n**3. read_document(doc_id: number)**\n- Return complete Markdown content of specified document\n\n### Package Configuration\n\n- TypeScript compilation with `@modelcontextprotocol/sdk`\n- `\"build\"` script for compilation\n- `\"test\"` script for running tests\n\n### SQLite Schema\n\n```sql\nCREATE VIRTUAL TABLE documents USING fts5(\n  path, title, tags, content\n);\n```\n\n### Expected Functionality\n\n- `index_markdown` successfully indexes all markdown files in directory\n- `search_documents` returns relevant results matching the query\n- `read_document` returns complete and correct markdown content\n- Graceful error handling for non-existent file paths\n\n## Acceptance Criteria\n\n- `cd src/markdown-sqlite && npm run build` compiles without errors\n- All three MCP tools work as specified\n- Error cases are handled appropriately\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "mcp-builder",
+    "name": "MCP Server Builder",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/modelcontextprotocol/servers",
+    "repo_commit": "f4244583a6af9425633e433a3eec000d23f4e011",
+    "repo_root": "/workspace/servers",
+    "human_skill_path": "upstream/skills/mcp-builder/SKILL.md",
+    "sequence": 25
+  }
+}

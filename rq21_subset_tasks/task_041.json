@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_slo_implementation",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/slo-generator\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Prometheus Backend SLO Configuration Support\n\n## Background\n   在 slo-generator 项目中增强 Prometheus 后端集成，新增 availability SLO 配置的计算逻辑。\n   需要在 `slo_generator/` Python 包中新增或修改模块以支持基于 Prometheus 的 availability SLI 计算。\n\n## Files to Create/Modify\n   - `slo_generator/backends/prometheus_availability.py` (新建，Prometheus availability SLI 计算模块)\n   - `slo_generator/utils/slo_config_validator.py` (新建，SLO 配置验证工具)\n   - `tests/test_slo_implementation.py` (新建，单元测试)\n\n## Requirements\n   \n   ### Prometheus Availability 模块 (slo_generator/backends/prometheus_availability.py)\n   - 实现 `PrometheusAvailabilitySLI` 类\n   - 支持通过 PromQL 查询计算 error rate：`sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))`\n   - 支持配置 SLO 目标值 (如 0.999 即 99.9%)\n   - 支持配置滚动窗口 (如 28 天)\n   - 提供 `compute_sli()` 方法返回 SLI 值\n   - 提供 `evaluate_slo()` 方法判断是否达标\n\n   ### SLO 配置验证器 (slo_generator/utils/slo_config_validator.py)\n   - 实现 `validate_slo_config(config: dict) -> bool` 函数\n   - 验证必填字段: service_name, slo_name, backend.type, goal, window\n   - 验证 backend.type 为支持的类型 (如 \"prometheus\")\n   - 验证 goal 在 (0, 1) 范围内\n   - 配置不合法时抛出 ValueError 并提供描述性错误信息\n\n   ### 单元测试 (tests/test_slo_implementation.py)\n   - 测试 PrometheusAvailabilitySLI 类初始化\n   - 测试 SLO 配置验证：合法配置通过、非法配置抛出 ValueError\n   - 测试 evaluate_slo() 在 SLI 高于/低于目标时的返回值\n\n## Acceptance Criteria\n   - `python -m py_compile slo_generator/backends/prometheus_availability.py` 成功\n   - `python -m py_compile slo_generator/utils/slo_config_validator.py` 成功\n   - `python -m pytest tests/test_slo_implementation.py -v --tb=short` 全部通过\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/slo-generator/.git ]; then cd /workspace/slo-generator && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_slo_implementation",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Prometheus Backend SLO Configuration Support\n\n## Background\n   在 slo-generator 项目中增强 Prometheus 后端集成，新增 availability SLO 配置的计算逻辑。\n   需要在 `slo_generator/` Python 包中新增或修改模块以支持基于 Prometheus 的 availability SLI 计算。\n\n## Files to Create/Modify\n   - `slo_generator/backends/prometheus_availability.py` (新建，Prometheus availability SLI 计算模块)\n   - `slo_generator/utils/slo_config_validator.py` (新建，SLO 配置验证工具)\n   - `tests/test_slo_implementation.py` (新建，单元测试)\n\n## Requirements\n   \n   ### Prometheus Availability 模块 (slo_generator/backends/prometheus_availability.py)\n   - 实现 `PrometheusAvailabilitySLI` 类\n   - 支持通过 PromQL 查询计算 error rate：`sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))`\n   - 支持配置 SLO 目标值 (如 0.999 即 99.9%)\n   - 支持配置滚动窗口 (如 28 天)\n   - 提供 `compute_sli()` 方法返回 SLI 值\n   - 提供 `evaluate_slo()` 方法判断是否达标\n\n   ### SLO 配置验证器 (slo_generator/utils/slo_config_validator.py)\n   - 实现 `validate_slo_config(config: dict) -> bool` 函数\n   - 验证必填字段: service_name, slo_name, backend.type, goal, window\n   - 验证 backend.type 为支持的类型 (如 \"prometheus\")\n   - 验证 goal 在 (0, 1) 范围内\n   - 配置不合法时抛出 ValueError 并提供描述性错误信息\n\n   ### 单元测试 (tests/test_slo_implementation.py)\n   - 测试 PrometheusAvailabilitySLI 类初始化\n   - 测试 SLO 配置验证：合法配置通过、非法配置抛出 ValueError\n   - 测试 evaluate_slo() 在 SLI 高于/低于目标时的返回值\n\n## Acceptance Criteria\n   - `python -m py_compile slo_generator/backends/prometheus_availability.py` 成功\n   - `python -m py_compile slo_generator/utils/slo_config_validator.py` 成功\n   - `python -m pytest tests/test_slo_implementation.py -v --tb=short` 全部通过\n",
+      "/workspace/.skill_id": "slo-implementation"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "slo-implementation",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/slo-implementation/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_slo_implementation.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Prometheus Backend SLO Configuration Support\n\n## Background\n   在 slo-generator 项目中增强 Prometheus 后端集成，新增 availability SLO 配置的计算逻辑。\n   需要在 `slo_generator/` Python 包中新增或修改模块以支持基于 Prometheus 的 availability SLI 计算。\n\n## Files to Create/Modify\n   - `slo_generator/backends/prometheus_availability.py` (新建，Prometheus availability SLI 计算模块)\n   - `slo_generator/utils/slo_config_validator.py` (新建，SLO 配置验证工具)\n   - `tests/test_slo_implementation.py` (新建，单元测试)\n\n## Requirements\n   \n   ### Prometheus Availability 模块 (slo_generator/backends/prometheus_availability.py)\n   - 实现 `PrometheusAvailabilitySLI` 类\n   - 支持通过 PromQL 查询计算 error rate：`sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))`\n   - 支持配置 SLO 目标值 (如 0.999 即 99.9%)\n   - 支持配置滚动窗口 (如 28 天)\n   - 提供 `compute_sli()` 方法返回 SLI 值\n   - 提供 `evaluate_slo()` 方法判断是否达标\n\n   ### SLO 配置验证器 (slo_generator/utils/slo_config_validator.py)\n   - 实现 `validate_slo_config(config: dict) -> bool` 函数\n   - 验证必填字段: service_name, slo_name, backend.type, goal, window\n   - 验证 backend.type 为支持的类型 (如 \"prometheus\")\n   - 验证 goal 在 (0, 1) 范围内\n   - 配置不合法时抛出 ValueError 并提供描述性错误信息\n\n   ### 单元测试 (tests/test_slo_implementation.py)\n   - 测试 PrometheusAvailabilitySLI 类初始化\n   - 测试 SLO 配置验证：合法配置通过、非法配置抛出 ValueError\n   - 测试 evaluate_slo() 在 SLI 高于/低于目标时的返回值\n\n## Acceptance Criteria\n   - `python -m py_compile slo_generator/backends/prometheus_availability.py` 成功\n   - `python -m py_compile slo_generator/utils/slo_config_validator.py` 成功\n   - `python -m pytest tests/test_slo_implementation.py -v --tb=short` 全部通过\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "slo-implementation",
+    "name": "SLO Implementation Framework",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/google/slo-generator",
+    "repo_commit": "771848d6b7eeccfebb939042f5aa27463ee5d426",
+    "repo_root": "/workspace/slo-generator",
+    "human_skill_path": "upstream/skills/slo-implementation/SKILL.md",
+    "sequence": 41
+  }
+}

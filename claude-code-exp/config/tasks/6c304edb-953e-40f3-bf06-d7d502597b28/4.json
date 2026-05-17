@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create currency_formatter_test.clj",
+  "description": "Write comprehensive tests covering currency conversion, null handling, non-currency columns, and invalid config fallback",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

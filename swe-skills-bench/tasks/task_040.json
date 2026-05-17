@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_similarity_search_patterns",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/milvus\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Similarity Search Demonstration for Milvus\n\n## Background\n   Add examples demonstrating similarity search behavior in Milvus with\n   index building, vector insertion, and query operations.\n\n## Files to Create/Modify\n   - examples/similarity_search_demo.py (new)\n   - examples/test_vectors.json (test data)\n   - benchmarks/similarity_benchmark.py (optional)\n\n## Requirements\n   \n   Demo Script:\n   - Create collection with proper schema\n   - Build appropriate index (IVF_FLAT or HNSW)\n   - Insert test vectors with known neighbors\n   - Execute similarity queries\n   \n   Test Dataset:\n   - Pre-annotated ground truth neighbors\n   - Various vector dimensions\n   - Edge cases (identical vectors, orthogonal vectors)\n   \n   Output Requirements:\n   - Top-K results for each query\n   - Verify known neighbors in results\n   - Query latency and parameters logged\n\n4. Validation:\n   - Top-K results contain pre-annotated neighbors\n   - Query parameters and latency in output\n   - JSON/CSV output format\n\n## Acceptance Criteria\n   - `python examples/similarity_search_demo.py` exits with code 0\n   - Output contains query parameters and latency\n   - Known neighbors appear in top-K results\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/milvus/.git ]; then cd /workspace/milvus && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_similarity_search_patterns",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Similarity Search Demonstration for Milvus\n\n## Background\n   Add examples demonstrating similarity search behavior in Milvus with\n   index building, vector insertion, and query operations.\n\n## Files to Create/Modify\n   - examples/similarity_search_demo.py (new)\n   - examples/test_vectors.json (test data)\n   - benchmarks/similarity_benchmark.py (optional)\n\n## Requirements\n   \n   Demo Script:\n   - Create collection with proper schema\n   - Build appropriate index (IVF_FLAT or HNSW)\n   - Insert test vectors with known neighbors\n   - Execute similarity queries\n   \n   Test Dataset:\n   - Pre-annotated ground truth neighbors\n   - Various vector dimensions\n   - Edge cases (identical vectors, orthogonal vectors)\n   \n   Output Requirements:\n   - Top-K results for each query\n   - Verify known neighbors in results\n   - Query latency and parameters logged\n\n4. Validation:\n   - Top-K results contain pre-annotated neighbors\n   - Query parameters and latency in output\n   - JSON/CSV output format\n\n## Acceptance Criteria\n   - `python examples/similarity_search_demo.py` exits with code 0\n   - Output contains query parameters and latency\n   - Known neighbors appear in top-K results\n",
+      "/workspace/.skill_id": "similarity-search-patterns"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "similarity-search-patterns",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "human_skill_path": "upstream/skills/similarity-search-patterns/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_similarity_search_patterns.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Similarity Search Demonstration for Milvus\n\n## Background\n   Add examples demonstrating similarity search behavior in Milvus with\n   index building, vector insertion, and query operations.\n\n## Files to Create/Modify\n   - examples/similarity_search_demo.py (new)\n   - examples/test_vectors.json (test data)\n   - benchmarks/similarity_benchmark.py (optional)\n\n## Requirements\n   \n   Demo Script:\n   - Create collection with proper schema\n   - Build appropriate index (IVF_FLAT or HNSW)\n   - Insert test vectors with known neighbors\n   - Execute similarity queries\n   \n   Test Dataset:\n   - Pre-annotated ground truth neighbors\n   - Various vector dimensions\n   - Edge cases (identical vectors, orthogonal vectors)\n   \n   Output Requirements:\n   - Top-K results for each query\n   - Verify known neighbors in results\n   - Query latency and parameters logged\n\n4. Validation:\n   - Top-K results contain pre-annotated neighbors\n   - Query parameters and latency in output\n   - JSON/CSV output format\n\n## Acceptance Criteria\n   - `python examples/similarity_search_demo.py` exits with code 0\n   - Output contains query parameters and latency\n   - Known neighbors appear in top-K results\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "similarity-search-patterns",
+    "name": "Similarity Search Patterns",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "repo_url": "https://github.com/milvus-io/milvus",
+    "repo_commit": "4bec0269ee2a32c8df31d4c7d97cde4971e5ba14",
+    "repo_root": "/workspace/milvus",
+    "human_skill_path": "upstream/skills/similarity-search-patterns/SKILL.md",
+    "sequence": 40
+  }
+}

@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: swe-skills-bridge
+Version: 0.1.0
+Summary: Bridge between SWE-Skills-Bench and AgentWeave's runner/pipeline infrastructure
+Requires-Python: >=3.10
+Requires-Dist: click>=8.1
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: docker>=7.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: black>=24.0; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"

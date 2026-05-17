@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Fix SAST.gitlab-ci.yml with proper extends and rules",
+  "description": "Add missing extends and rules fields to lib/gitlab/ci/templates/Security/SAST.gitlab-ci.yml",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

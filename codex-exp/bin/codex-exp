@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Codex 0.45.0 实验专属 wrapper
+# 用法: codex-exp [任何 codex 参数]
+#
+# 它做了什么：
+#   1. CODEX_HOME 指向实验配置目录（隔离日常 ~/.codex/）
+#   2. 加载 config/.env：OPENAI_API_KEY=<deepseek key>
+#   3. 调用本地 node_modules 里的 codex 0.45.0
+#   4. 走 DeepSeek 通过 wire_api="chat"
+
+set -euo pipefail
+
+HARNESS_DIR="$HOME/agentweave/codex-exp"
+
+# 加载 .env
+if [ -f "$HARNESS_DIR/config/.env" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$HARNESS_DIR/config/.env"
+  set +a
+fi
+
+# 隔离 home
+export CODEX_HOME="$HARNESS_DIR/home"
+
+# 绕开 macOS 系统代理（Clash 在 127.0.0.1:7897 会拦 localhost 流量）
+export NO_PROXY="127.0.0.1,localhost,0.0.0.0"
+export http_proxy=""
+export https_proxy=""
+export HTTP_PROXY=""
+export HTTPS_PROXY=""
+
+# 自动启动 DeepSeek thinking 注入代理（如未启动）
+if ! lsof -iTCP:8765 -sTCP:LISTEN >/dev/null 2>&1; then
+  echo "[codex-exp] starting deepseek proxy on :8765..."
+  nohup python3 "$HARNESS_DIR/proxy/deepseek_proxy.py" > /tmp/deepseek_proxy.log 2>&1 &
+  sleep 1
+fi
+
+# 调本地 codex
+exec "$HARNESS_DIR/node_modules/.bin/codex" "$@"

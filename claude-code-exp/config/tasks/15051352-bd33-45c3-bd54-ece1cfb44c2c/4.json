@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create root BUILD.bazel with //:format target",
+  "description": "Create examples/python-bazel/BUILD.bazel as root build file",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Verify lint and tests pass",
+  "description": "Run npm run lint and npm test to verify acceptance criteria",
+  "activeForm": "Verifying lint and tests pass",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

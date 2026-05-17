@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Define site-currency setting",
+  "description": "Add a site-currency defsetting in appearance/settings.clj",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

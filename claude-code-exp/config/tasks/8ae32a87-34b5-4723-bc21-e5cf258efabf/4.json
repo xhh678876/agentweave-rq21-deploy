@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create WORKSPACE file",
+  "description": "Create examples/python-bazel/WORKSPACE with rules_python and hermetic Python toolchain",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

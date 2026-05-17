@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Add batch endpoint to capture.py",
+  "description": "Create posthog/api/capture.py with POST /batch endpoint supporting bulk events, validation, atomic processing, and metrics logging",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

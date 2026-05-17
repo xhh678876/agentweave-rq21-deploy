@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_python_configuration",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/fastapi\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Implement Type-Safe Configuration with pydantic-settings\n\n## Background\n   Transform FastAPI's hardcoded configuration into a type-safe configuration\n   system using pydantic-settings BaseSettings.\n\n## Files to Create/Modify\n   - docs_src/settings/tutorial001.py\n   - docs_src/settings/tutorial001_test.py\n\n## Requirements\n   \n   Settings Class:\n   - Inherit from pydantic_settings.BaseSettings\n   - Fields:\n     * app_name: str\n     * admin_email: EmailStr\n     * database_url: PostgresDsn\n     * debug: bool (default: False)\n     * max_connections: PositiveInt (default: 10)\n   \n   Singleton Pattern:\n   - Use @lru_cache decorator for lazy loading\n   - Single instance throughout application\n   \n   Dependency Injection:\n   - Use FastAPI Depends to inject into routes\n   - Proper type annotations\n\n### Expected Functionality\n\n   1) Environment variables set via monkeypatch → config loads correctly\n   2) Missing required field admin_email → raises ValidationError\n   3) Invalid database_url format → error message contains field name\n   4) Default values applied when not specified\n\n## Acceptance Criteria\n\n   - Settings class validates all fields properly\n   - Error messages are descriptive\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/fastapi/.git ]; then cd /workspace/fastapi && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_python_configuration",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Implement Type-Safe Configuration with pydantic-settings\n\n## Background\n   Transform FastAPI's hardcoded configuration into a type-safe configuration\n   system using pydantic-settings BaseSettings.\n\n## Files to Create/Modify\n   - docs_src/settings/tutorial001.py\n   - docs_src/settings/tutorial001_test.py\n\n## Requirements\n   \n   Settings Class:\n   - Inherit from pydantic_settings.BaseSettings\n   - Fields:\n     * app_name: str\n     * admin_email: EmailStr\n     * database_url: PostgresDsn\n     * debug: bool (default: False)\n     * max_connections: PositiveInt (default: 10)\n   \n   Singleton Pattern:\n   - Use @lru_cache decorator for lazy loading\n   - Single instance throughout application\n   \n   Dependency Injection:\n   - Use FastAPI Depends to inject into routes\n   - Proper type annotations\n\n### Expected Functionality\n\n   1) Environment variables set via monkeypatch → config loads correctly\n   2) Missing required field admin_email → raises ValidationError\n   3) Invalid database_url format → error message contains field name\n   4) Default values applied when not specified\n\n## Acceptance Criteria\n\n   - Settings class validates all fields properly\n   - Error messages are descriptive\n",
+      "/workspace/.skill_id": "python-configuration"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "python-configuration",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/python-configuration/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_python_configuration.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Implement Type-Safe Configuration with pydantic-settings\n\n## Background\n   Transform FastAPI's hardcoded configuration into a type-safe configuration\n   system using pydantic-settings BaseSettings.\n\n## Files to Create/Modify\n   - docs_src/settings/tutorial001.py\n   - docs_src/settings/tutorial001_test.py\n\n## Requirements\n   \n   Settings Class:\n   - Inherit from pydantic_settings.BaseSettings\n   - Fields:\n     * app_name: str\n     * admin_email: EmailStr\n     * database_url: PostgresDsn\n     * debug: bool (default: False)\n     * max_connections: PositiveInt (default: 10)\n   \n   Singleton Pattern:\n   - Use @lru_cache decorator for lazy loading\n   - Single instance throughout application\n   \n   Dependency Injection:\n   - Use FastAPI Depends to inject into routes\n   - Proper type annotations\n\n### Expected Functionality\n\n   1) Environment variables set via monkeypatch → config loads correctly\n   2) Missing required field admin_email → raises ValidationError\n   3) Invalid database_url format → error message contains field name\n   4) Default values applied when not specified\n\n## Acceptance Criteria\n\n   - Settings class validates all fields properly\n   - Error messages are descriptive\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "python-configuration",
+    "name": "Python Configuration Management",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/fastapi/fastapi",
+    "repo_commit": "937d3075f9456dfcdfe2e1f6bc3b8b7b9a6c6cad",
+    "repo_root": "/workspace/fastapi",
+    "human_skill_path": "upstream/skills/python-configuration/SKILL.md",
+    "sequence": 31
+  }
+}

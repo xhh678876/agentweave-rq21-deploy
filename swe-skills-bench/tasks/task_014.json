@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_github_actions_templates",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/starter-workflows\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Python CI Workflow Template for GitHub Actions\n\n## Background\n   Add a new CI workflow template for Python projects in the starter-workflows\n   repository, covering multi-version testing with dependency caching.\n\n## Files to Create/Modify\n   - ci/python-pytest.yml - Workflow template\n   - ci/properties/python-pytest.properties.json - Template metadata\n\n## Requirements\n   \n   Workflow Template (python-pytest.yml):\n   \n   Triggers:\n   - push to main/master\n   - pull_request to main/master\n   \n   Matrix Strategy:\n   - Python versions: 3.9, 3.10, 3.11, 3.12\n   - OS: ubuntu-latest\n   \n   Steps:\n   1. Checkout code\n   2. Set up Python with version matrix\n   3. Cache pip dependencies\n   4. Install dependencies from requirements.txt\n   5. Run pytest with coverage\n   \n   Caching:\n   - Use actions/cache or setup-python's built-in cache\n   - Cache key based on requirements.txt hash\n   \n   Properties File (python-pytest.properties.json):\n   ```json\n   {\n     \"name\": \"Python pytest\",\n     \"description\": \"Run Python tests with pytest across multiple Python versions\",\n     \"iconName\": \"python\",\n     \"categories\": [\"Python\", \"CI\"]\n   }\n   ```\n\n4. Validation Requirements:\n   - Workflow passes actionlint syntax check\n   - Properties JSON is valid and contains required fields\n   - Proper YAML formatting and indentation\n\n## Acceptance Criteria\n   - `actionlint ci/python-pytest.yml` exits with code 0 (no errors)\n   - ci/properties/python-pytest.properties.json exists with required fields\n   - Workflow syntax is valid GitHub Actions format\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/starter-workflows/.git ]; then cd /workspace/starter-workflows && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_github_actions_templates",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Python CI Workflow Template for GitHub Actions\n\n## Background\n   Add a new CI workflow template for Python projects in the starter-workflows\n   repository, covering multi-version testing with dependency caching.\n\n## Files to Create/Modify\n   - ci/python-pytest.yml - Workflow template\n   - ci/properties/python-pytest.properties.json - Template metadata\n\n## Requirements\n   \n   Workflow Template (python-pytest.yml):\n   \n   Triggers:\n   - push to main/master\n   - pull_request to main/master\n   \n   Matrix Strategy:\n   - Python versions: 3.9, 3.10, 3.11, 3.12\n   - OS: ubuntu-latest\n   \n   Steps:\n   1. Checkout code\n   2. Set up Python with version matrix\n   3. Cache pip dependencies\n   4. Install dependencies from requirements.txt\n   5. Run pytest with coverage\n   \n   Caching:\n   - Use actions/cache or setup-python's built-in cache\n   - Cache key based on requirements.txt hash\n   \n   Properties File (python-pytest.properties.json):\n   ```json\n   {\n     \"name\": \"Python pytest\",\n     \"description\": \"Run Python tests with pytest across multiple Python versions\",\n     \"iconName\": \"python\",\n     \"categories\": [\"Python\", \"CI\"]\n   }\n   ```\n\n4. Validation Requirements:\n   - Workflow passes actionlint syntax check\n   - Properties JSON is valid and contains required fields\n   - Proper YAML formatting and indentation\n\n## Acceptance Criteria\n   - `actionlint ci/python-pytest.yml` exits with code 0 (no errors)\n   - ci/properties/python-pytest.properties.json exists with required fields\n   - Workflow syntax is valid GitHub Actions format\n",
+      "/workspace/.skill_id": "github-actions-templates"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "github-actions-templates",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/github-actions-templates/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_github_actions_templates.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 60
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Python CI Workflow Template for GitHub Actions\n\n## Background\n   Add a new CI workflow template for Python projects in the starter-workflows\n   repository, covering multi-version testing with dependency caching.\n\n## Files to Create/Modify\n   - ci/python-pytest.yml - Workflow template\n   - ci/properties/python-pytest.properties.json - Template metadata\n\n## Requirements\n   \n   Workflow Template (python-pytest.yml):\n   \n   Triggers:\n   - push to main/master\n   - pull_request to main/master\n   \n   Matrix Strategy:\n   - Python versions: 3.9, 3.10, 3.11, 3.12\n   - OS: ubuntu-latest\n   \n   Steps:\n   1. Checkout code\n   2. Set up Python with version matrix\n   3. Cache pip dependencies\n   4. Install dependencies from requirements.txt\n   5. Run pytest with coverage\n   \n   Caching:\n   - Use actions/cache or setup-python's built-in cache\n   - Cache key based on requirements.txt hash\n   \n   Properties File (python-pytest.properties.json):\n   ```json\n   {\n     \"name\": \"Python pytest\",\n     \"description\": \"Run Python tests with pytest across multiple Python versions\",\n     \"iconName\": \"python\",\n     \"categories\": [\"Python\", \"CI\"]\n   }\n   ```\n\n4. Validation Requirements:\n   - Workflow passes actionlint syntax check\n   - Properties JSON is valid and contains required fields\n   - Proper YAML formatting and indentation\n\n## Acceptance Criteria\n   - `actionlint ci/python-pytest.yml` exits with code 0 (no errors)\n   - ci/properties/python-pytest.properties.json exists with required fields\n   - Workflow syntax is valid GitHub Actions format\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "github-actions-templates",
+    "name": "GitHub Actions Templates",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/actions/starter-workflows",
+    "repo_commit": "affda94109f2228d5a7f542a28d23272ae31e00b",
+    "repo_root": "/workspace/starter-workflows",
+    "human_skill_path": "upstream/skills/github-actions-templates/SKILL.md",
+    "sequence": 14
+  }
+}

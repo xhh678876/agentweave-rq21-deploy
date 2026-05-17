@@ -1,0 +1,8 @@
+{
+  "id": "6",
+  "subject": "Build and test the project",
+  "description": "Run bazel build //... and bazel test //... to verify",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

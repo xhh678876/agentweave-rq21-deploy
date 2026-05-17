@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Install dependencies and verify",
+  "description": "Run npm install and benchmark to verify everything works",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create examples/ directory and rag_config.yaml",
+  "description": "Create the directory structure and configuration file for the RAG demo",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

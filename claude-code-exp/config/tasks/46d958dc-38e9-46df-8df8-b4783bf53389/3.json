@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Add DDL for weight_records table",
+  "description": "Add CREATE TABLE and ALTER statements for weight_records to schema.sql",
+  "activeForm": "Adding DDL for weight_records table",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

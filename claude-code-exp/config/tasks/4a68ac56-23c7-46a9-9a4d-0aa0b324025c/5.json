@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create API endpoint for audit-logs",
+  "description": "Create audit-logs.js endpoint with browse and read methods",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

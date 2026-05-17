@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create currency_formatter.clj middleware",
+  "description": "Implement the currency formatter middleware in src/metabase/query_processor/middleware/currency_formatter.clj",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

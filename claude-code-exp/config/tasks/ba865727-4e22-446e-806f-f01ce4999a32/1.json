@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create tcp_metrics_test.go tests",
+  "description": "Create viz/metrics-api/tcp_metrics_test.go with tests for metric counter increments, duration histogram bucketing, label cardinality validation, and thread-safe metric updates.",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

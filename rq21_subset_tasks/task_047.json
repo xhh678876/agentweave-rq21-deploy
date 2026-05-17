@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_vector_index_tuning",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/faiss\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Vector Index Tuning Examples for FAISS\n\n## Background\n\n   Add index tuning examples demonstrating the trade-off between recall\n   and latency for different FAISS index configurations.\n\n## Files to Create/Modify\n\n- benchs/index_tuning_demo.py (new)\n- examples/index_tuning/ (new directory)\n- tools/benchmark_index.py (optional)\n\n## Requirements\n\n   Index Types to Demonstrate:\n\n- Flat (brute force baseline)\n- IVF (inverted file)\n- HNSW (hierarchical navigable small world)\n- PQ (product quantization)\n\n   Benchmark Script:\n\n- Multiple parameter configurations\n- Measure recall@K for different nprobe/efSearch values\n- Measure query latency\n- Output results to CSV/JSON\n\n   Parameters to Vary:\n\n- nlist (for IVF)\n- nprobe (for IVF)\n- M, efConstruction, efSearch (for HNSW)\n\n4. Output Requirements:\n   - recall@10 and recall@100 metrics\n   - Query latency in milliseconds\n   - Memory usage statistics\n\n## Acceptance Criteria\n\n- `python benchs/index_tuning_demo.py` exits with code 0\n- Output contains recall and latency metrics\n- Clear trade-off demonstration\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/faiss/.git ]; then cd /workspace/faiss && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_vector_index_tuning",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Vector Index Tuning Examples for FAISS\n\n## Background\n\n   Add index tuning examples demonstrating the trade-off between recall\n   and latency for different FAISS index configurations.\n\n## Files to Create/Modify\n\n- benchs/index_tuning_demo.py (new)\n- examples/index_tuning/ (new directory)\n- tools/benchmark_index.py (optional)\n\n## Requirements\n\n   Index Types to Demonstrate:\n\n- Flat (brute force baseline)\n- IVF (inverted file)\n- HNSW (hierarchical navigable small world)\n- PQ (product quantization)\n\n   Benchmark Script:\n\n- Multiple parameter configurations\n- Measure recall@K for different nprobe/efSearch values\n- Measure query latency\n- Output results to CSV/JSON\n\n   Parameters to Vary:\n\n- nlist (for IVF)\n- nprobe (for IVF)\n- M, efConstruction, efSearch (for HNSW)\n\n4. Output Requirements:\n   - recall@10 and recall@100 metrics\n   - Query latency in milliseconds\n   - Memory usage statistics\n\n## Acceptance Criteria\n\n- `python benchs/index_tuning_demo.py` exits with code 0\n- Output contains recall and latency metrics\n- Clear trade-off demonstration\n",
+      "/workspace/.skill_id": "vector-index-tuning"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "vector-index-tuning",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/vector-index-tuning/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_vector_index_tuning.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Vector Index Tuning Examples for FAISS\n\n## Background\n\n   Add index tuning examples demonstrating the trade-off between recall\n   and latency for different FAISS index configurations.\n\n## Files to Create/Modify\n\n- benchs/index_tuning_demo.py (new)\n- examples/index_tuning/ (new directory)\n- tools/benchmark_index.py (optional)\n\n## Requirements\n\n   Index Types to Demonstrate:\n\n- Flat (brute force baseline)\n- IVF (inverted file)\n- HNSW (hierarchical navigable small world)\n- PQ (product quantization)\n\n   Benchmark Script:\n\n- Multiple parameter configurations\n- Measure recall@K for different nprobe/efSearch values\n- Measure query latency\n- Output results to CSV/JSON\n\n   Parameters to Vary:\n\n- nlist (for IVF)\n- nprobe (for IVF)\n- M, efConstruction, efSearch (for HNSW)\n\n4. Output Requirements:\n   - recall@10 and recall@100 metrics\n   - Query latency in milliseconds\n   - Memory usage statistics\n\n## Acceptance Criteria\n\n- `python benchs/index_tuning_demo.py` exits with code 0\n- Output contains recall and latency metrics\n- Clear trade-off demonstration\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "vector-index-tuning",
+    "name": "Vector Index Tuning",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/facebookresearch/faiss",
+    "repo_commit": "0759009bd7ddf290170c930c70a722badd05aa7d",
+    "repo_root": "/workspace/faiss",
+    "human_skill_path": "upstream/skills/vector-index-tuning/SKILL.md",
+    "sequence": 47
+  }
+}

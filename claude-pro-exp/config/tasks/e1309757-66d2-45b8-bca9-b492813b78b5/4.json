@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Create rag_config.yaml configuration",
+  "description": "Create examples/rag_config.yaml with chunk size, retriever k, embedding model, and other settings",
+  "activeForm": "Creating RAG config file",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

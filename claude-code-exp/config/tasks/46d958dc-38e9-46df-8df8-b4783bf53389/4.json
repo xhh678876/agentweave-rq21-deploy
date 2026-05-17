@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Verify compilation",
+  "description": "Run ./mvnw compile to verify the application compiles without errors",
+  "activeForm": "Verifying compilation",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create test_vectors.json test dataset",
+  "description": "Pre-annotated ground truth neighbors with various vector dimensions and edge cases (identical vectors, orthogonal vectors)",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

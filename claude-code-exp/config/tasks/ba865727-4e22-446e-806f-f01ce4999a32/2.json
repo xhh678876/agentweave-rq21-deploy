@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Build and test the changes",
+  "description": "Run `go build ./viz/...` and `go test ./viz/metrics-api/...` to verify acceptance criteria.",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

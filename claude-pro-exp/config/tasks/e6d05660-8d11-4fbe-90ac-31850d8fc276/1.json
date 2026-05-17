@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create audit-logs API endpoint for Ghost CMS",
+  "description": "Create audit_logs endpoint: model, API endpoint implementation, route registration, and test cases",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

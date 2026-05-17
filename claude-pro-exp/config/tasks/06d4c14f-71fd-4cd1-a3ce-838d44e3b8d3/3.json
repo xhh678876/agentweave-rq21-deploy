@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create safe_backup.sh with defensive coding",
+  "description": "Create test/safe_backup.sh with set -euo pipefail, proper quoting, trap for cleanup, input validation, meaningful exit codes",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

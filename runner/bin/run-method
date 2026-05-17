@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Wrapper around `python -m agentweave_runner.cli`. Prefers the runner's own
+# venv if present, else falls back to the langgraph harness venv (which has
+# langgraph_harness importable).
+set -euo pipefail
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if [ -f "${HERE}/.venv/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "${HERE}/.venv/bin/activate"
+elif [ -f "${HOME}/agentweave/harness-exp-langgraph/.venv/bin/activate" ]; then
+  # shellcheck disable=SC1091
+  source "${HOME}/agentweave/harness-exp-langgraph/.venv/bin/activate"
+  # Make our package importable on top of the harness venv
+  export PYTHONPATH="${HERE}/src${PYTHONPATH:+:${PYTHONPATH}}"
+fi
+
+exec python -m agentweave_runner.cli "$@"

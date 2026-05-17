@@ -1,0 +1,7 @@
+# DeepSeek API keys (one per line, # 开头是注释)
+# 把这文件 cp 到 ~/.deepseek_keys (不要进 git!)
+# 4-8 个 key 配合 multi_key_proxy.py 轮换使用
+sk-key1-here
+sk-key2-here
+sk-key3-here
+sk-key4-here

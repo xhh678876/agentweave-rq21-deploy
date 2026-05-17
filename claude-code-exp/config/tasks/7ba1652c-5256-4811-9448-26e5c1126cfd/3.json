@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Run tests to verify",
+  "description": "Ensure all existing tests pass after changes",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

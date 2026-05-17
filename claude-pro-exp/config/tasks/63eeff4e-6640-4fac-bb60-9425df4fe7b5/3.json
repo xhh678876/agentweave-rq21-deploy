@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Create analyze_profile.py analysis helper",
+  "description": "Create scripts/analyze_profile.py that loads py-spy output, extracts top functions, generates summary report, and exports JSON",
+  "activeForm": "Creating analyze_profile.py",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

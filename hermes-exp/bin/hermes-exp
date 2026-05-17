@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Hermes 实验专属 wrapper（复用你日常的 Hermes 二进制，只隔离 HERMES_HOME）
+# 用法: hermes-exp [任何 hermes 参数]
+#
+# 它做了什么：
+#   1. HERMES_HOME 指向实验配置目录（隔离日常 ~/.hermes/）
+#   2. 加载 config/.env：OPENROUTER_API_KEY + OPENROUTER_BASE_URL 指 DeepSeek
+#   3. 调用你日常已装好的 ~/.local/bin/hermes（二进制不动）
+
+set -euo pipefail
+
+HARNESS_DIR="$HOME/agentweave/hermes-exp"
+
+# 加载 .env（含 DeepSeek key 重定向）
+if [ -f "$HARNESS_DIR/config/.env" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$HARNESS_DIR/config/.env"
+  set +a
+fi
+
+# 隔离 home：默认用 home/，但调用者可以 export HERMES_HOME 覆盖
+# (HermesAdapter per-task 用临时 home 时 export 自己的)
+export HERMES_HOME="${HERMES_HOME:-$HARNESS_DIR/home}"
+
+# 调用全局 hermes（你日常装的那只）
+exec "$HOME/.local/bin/hermes" "$@"

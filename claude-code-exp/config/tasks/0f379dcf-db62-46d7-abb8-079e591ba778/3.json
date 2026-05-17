@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Integrate middleware into CSV/JSON export",
+  "description": "Call currency formatter middleware in the dataset export endpoints in query_processor/api.clj",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

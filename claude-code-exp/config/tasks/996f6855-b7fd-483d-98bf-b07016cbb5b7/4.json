@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create migration for low_stock_threshold field",
+  "description": "Create a Django migration for the new low_stock_threshold field on Stock model",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

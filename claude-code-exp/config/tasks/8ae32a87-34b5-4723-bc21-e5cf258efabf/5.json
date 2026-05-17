@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create src/main.py",
+  "description": "Sample Python code for the py_binary target",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# AgentWeave 实验专属龙虾 wrapper
+# 用法：openclaw-exp [任何 openclaw 参数]
+#
+# 它做了什么：
+#   1. 把 CLAUDE_CONFIG_DIR 指向实验配置目录（隔离日常 ~/.claude/）
+#   2. 自动加载 config/.env 里的 API key
+#   3. 调用项目本地的 openclaw 二进制（不是全局那只）
+#   4. 锁定模型为 deepseek-v4-flash
+#
+# 它没有动什么：
+#   - /opt/homebrew/bin/openclaw（你的日常龙虾）
+#   - ~/.claude/（你的日常配置 / SJTU memory / ECC skills）
+
+set -euo pipefail
+
+HARNESS_DIR="$HOME/agentweave/harness-exp"
+
+# 加载实验 .env（若存在）
+if [ -f "$HARNESS_DIR/config/.env" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$HARNESS_DIR/config/.env"
+  set +a
+fi
+
+# 关键：把配置目录切到实验专属
+export CLAUDE_CONFIG_DIR="$HARNESS_DIR/config"
+
+# 显式标记当前进程在跑实验
+export AGENTWEAVE_EXP=1
+
+# 调用项目本地 openclaw（不是全局）+ 强制 --profile agentweave-exp 隔离
+# （OpenClaw 默认会找 ~/.openclaw/openclaw.json，那里有日常配置，需绕开）
+exec "$HARNESS_DIR/node_modules/.bin/openclaw" --profile agentweave-exp "$@"

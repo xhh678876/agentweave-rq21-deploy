@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Verify both files work correctly",
+  "description": "Run the demo script and tests to verify everything works",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

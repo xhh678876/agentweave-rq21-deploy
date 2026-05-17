@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create currency formatter middleware",
+  "description": "Create the middleware file that performs currency conversion on result rows",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

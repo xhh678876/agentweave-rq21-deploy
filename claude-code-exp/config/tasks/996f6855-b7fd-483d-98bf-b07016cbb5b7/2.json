@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create test file for low stock alert",
+  "description": "Create saleor/warehouse/tests/test_low_stock.py with tests for the low stock alert feature",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

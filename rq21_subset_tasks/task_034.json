@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_python_performance_optimization",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/py-spy\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Python Profiling Demo Scripts for py-spy\n\n## Background\n   Add practical profiling demo\n   scripts to the py-spy repository that demonstrate various profiling\n   scenarios and analysis workflows.\n\n## Files to Create/Modify\n   - examples/profiling_targets/cpu_bound.py (CPU-intensive workload)\n   - examples/profiling_targets/io_bound.py (I/O-intensive workload)\n   - examples/profiling_targets/README.md (documentation)\n   - scripts/analyze_profile.py (profile analysis helper)\n\n## Requirements\n   \n   CPU-Bound Example (cpu_bound.py):\n   - Recursive Fibonacci calculation\n   - Matrix multiplication\n   - String processing loops\n   - Clear hotspot functions for easy identification\n   \n   I/O-Bound Example (io_bound.py):\n   - File operations\n   - Sleep-based simulation\n   - Network call simulation (localhost)\n   - Threading/async patterns\n   \n   Analysis Script (scripts/analyze_profile.py):\n   - Load py-spy output (flamegraph SVG or speedscope JSON)\n   - Extract top functions by time\n   - Generate summary report\n   - JSON export for further analysis\n\n4. Expected py-spy Commands:\n   - `py-spy record -o profile.svg -- python examples/profiling_targets/cpu_bound.py`\n   - `py-spy top -- python examples/profiling_targets/io_bound.py`\n\n## Acceptance Criteria\n   - Demo scripts run independently without py-spy\n   - `python examples/profiling_targets/cpu_bound.py` exits with code 0\n   - README explains how to use py-spy with examples\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-rust:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/py-spy/.git ]; then cd /workspace/py-spy && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_python_performance_optimization",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Python Profiling Demo Scripts for py-spy\n\n## Background\n   Add practical profiling demo\n   scripts to the py-spy repository that demonstrate various profiling\n   scenarios and analysis workflows.\n\n## Files to Create/Modify\n   - examples/profiling_targets/cpu_bound.py (CPU-intensive workload)\n   - examples/profiling_targets/io_bound.py (I/O-intensive workload)\n   - examples/profiling_targets/README.md (documentation)\n   - scripts/analyze_profile.py (profile analysis helper)\n\n## Requirements\n   \n   CPU-Bound Example (cpu_bound.py):\n   - Recursive Fibonacci calculation\n   - Matrix multiplication\n   - String processing loops\n   - Clear hotspot functions for easy identification\n   \n   I/O-Bound Example (io_bound.py):\n   - File operations\n   - Sleep-based simulation\n   - Network call simulation (localhost)\n   - Threading/async patterns\n   \n   Analysis Script (scripts/analyze_profile.py):\n   - Load py-spy output (flamegraph SVG or speedscope JSON)\n   - Extract top functions by time\n   - Generate summary report\n   - JSON export for further analysis\n\n4. Expected py-spy Commands:\n   - `py-spy record -o profile.svg -- python examples/profiling_targets/cpu_bound.py`\n   - `py-spy top -- python examples/profiling_targets/io_bound.py`\n\n## Acceptance Criteria\n   - Demo scripts run independently without py-spy\n   - `python examples/profiling_targets/cpu_bound.py` exits with code 0\n   - README explains how to use py-spy with examples\n",
+      "/workspace/.skill_id": "python-performance-optimization"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "python-performance-optimization",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-rust:latest",
+    "human_skill_path": "upstream/skills/python-performance-optimization/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_python_performance_optimization.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Python Profiling Demo Scripts for py-spy\n\n## Background\n   Add practical profiling demo\n   scripts to the py-spy repository that demonstrate various profiling\n   scenarios and analysis workflows.\n\n## Files to Create/Modify\n   - examples/profiling_targets/cpu_bound.py (CPU-intensive workload)\n   - examples/profiling_targets/io_bound.py (I/O-intensive workload)\n   - examples/profiling_targets/README.md (documentation)\n   - scripts/analyze_profile.py (profile analysis helper)\n\n## Requirements\n   \n   CPU-Bound Example (cpu_bound.py):\n   - Recursive Fibonacci calculation\n   - Matrix multiplication\n   - String processing loops\n   - Clear hotspot functions for easy identification\n   \n   I/O-Bound Example (io_bound.py):\n   - File operations\n   - Sleep-based simulation\n   - Network call simulation (localhost)\n   - Threading/async patterns\n   \n   Analysis Script (scripts/analyze_profile.py):\n   - Load py-spy output (flamegraph SVG or speedscope JSON)\n   - Extract top functions by time\n   - Generate summary report\n   - JSON export for further analysis\n\n4. Expected py-spy Commands:\n   - `py-spy record -o profile.svg -- python examples/profiling_targets/cpu_bound.py`\n   - `py-spy top -- python examples/profiling_targets/io_bound.py`\n\n## Acceptance Criteria\n   - Demo scripts run independently without py-spy\n   - `python examples/profiling_targets/cpu_bound.py` exits with code 0\n   - README explains how to use py-spy with examples\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "python-performance-optimization",
+    "name": "Python Performance Optimizer",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-rust:latest",
+    "repo_url": "https://github.com/benfred/py-spy",
+    "repo_commit": "5e14e32f8d43be38cf538cd104531494f508c6d4",
+    "repo_root": "/workspace/py-spy",
+    "human_skill_path": "upstream/skills/python-performance-optimization/SKILL.md",
+    "sequence": 34
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create batch_config.py configuration",
+  "description": "Create posthog/settings/batch_config.py with BATCH_MAX_SIZE, BATCH_TIMEOUT_MS, BATCH_RETRY_COUNT and env var overrides",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Modernize iterutils.py - f-strings and % formatting",
+  "description": "Replace all %-style string formatting and str.format() with f-strings in iterutils.py",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

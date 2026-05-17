@@ -1,0 +1,9 @@
+{
+  "id": "5",
+  "subject": "Create WeightRecord entity",
+  "description": "Create the WeightRecord JPA entity with id (Long), petId (Long), weightKg (Double), recordDate (LocalDate)",
+  "activeForm": "Creating WeightRecord entity",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

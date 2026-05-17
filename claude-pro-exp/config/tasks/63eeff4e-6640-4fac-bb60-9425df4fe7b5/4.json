@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Create README.md for profiling targets",
+  "description": "Create examples/profiling_targets/README.md explaining how to use py-spy with the examples",
+  "activeForm": "Creating README.md",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

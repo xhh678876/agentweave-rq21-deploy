@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Validate demo script runs successfully",
+  "description": "Ensure python examples/similarity_search_demo.py exits with code 0 and produces valid output",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

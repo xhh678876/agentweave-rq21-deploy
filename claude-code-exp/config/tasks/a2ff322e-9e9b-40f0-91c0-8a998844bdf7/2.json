@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Create demo_packaging.py",
+  "description": "Create scripts/demo_packaging.py with version comparison, specifier filtering, wheel metadata parsing, and complete usage workflow",
+  "activeForm": "Creating demo script",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create .bazelrc configuration",
+  "description": "Create .bazelrc with remote cache/execution placeholders, local development, and CI settings",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

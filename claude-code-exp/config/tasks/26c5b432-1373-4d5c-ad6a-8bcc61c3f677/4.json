@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Modify dataset.clj for export integration",
+  "description": "Integrate currency formatter middleware into POST /api/dataset/csv and POST /api/dataset/json export paths in src/metabase/api/dataset.clj",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

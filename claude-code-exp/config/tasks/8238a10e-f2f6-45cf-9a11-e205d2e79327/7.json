@@ -1,0 +1,8 @@
+{
+  "id": "7",
+  "subject": "Create root BUILD.bazel",
+  "description": "Create the root BUILD.bazel file",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create examples/risk_metrics_demo.py",
+  "description": "Create example script demonstrating Sharpe ratio, max drawdown, Sortino ratio, Calmar ratio with sample data, outputting to JSON/CSV",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

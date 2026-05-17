@@ -1,0 +1,12 @@
+{
+  "id": "3",
+  "subject": "Test and verify the scripts",
+  "description": "Run the benchmark script and verify it exits with code 0 and produces correct output",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": [
+    "1",
+    "4",
+    "2"
+  ]
+}

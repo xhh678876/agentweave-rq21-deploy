@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create currency formatter tests",
+  "description": "Create test file for the currency formatter middleware",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

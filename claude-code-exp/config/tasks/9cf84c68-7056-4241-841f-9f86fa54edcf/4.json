@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Run tests and verify",
+  "description": "Run python manage.py test posthog.tests.test_batch_capture and verify all acceptance criteria",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

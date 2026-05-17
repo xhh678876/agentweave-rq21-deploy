@@ -1,0 +1,14 @@
+pyproject.toml
+src/swe_skills_bridge/__init__.py
+src/swe_skills_bridge/cli.py
+src/swe_skills_bridge/eval_adapter.py
+src/swe_skills_bridge/installer.py
+src/swe_skills_bridge/skill_loader.py
+src/swe_skills_bridge/task_adapter.py
+src/swe_skills_bridge.egg-info/PKG-INFO
+src/swe_skills_bridge.egg-info/SOURCES.txt
+src/swe_skills_bridge.egg-info/dependency_links.txt
+src/swe_skills_bridge.egg-info/entry_points.txt
+src/swe_skills_bridge.egg-info/requires.txt
+src/swe_skills_bridge.egg-info/top_level.txt
+tests/test_smoke_e2e.py

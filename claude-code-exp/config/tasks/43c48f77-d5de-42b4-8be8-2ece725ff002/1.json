@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create multi-job-prometheus.yml example config",
+  "description": "Create documentation/examples/multi-job-prometheus.yml with 3 scrape jobs: prometheus, node-exporter (with relabel_configs), and kubernetes-pods (with metric_relabel_configs)",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

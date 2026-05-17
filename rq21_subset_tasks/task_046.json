@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_v3_performance_optimization",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/flash-attention\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Flash Attention Performance Benchmark and Optimization Examples\n\n## Background\n   Create performance benchmarks and optimization examples for Flash Attention\n   demonstrating speedup comparisons with standard attention mechanisms.\n\n## Files to Create/Modify\n   - benchmarks/benchmark_attention.py (new)\n   - benchmarks/configs/benchmark_config.yaml (new)\n   - examples/optimization_demo.py (new)\n\n## Requirements\n   \n   Benchmark Script (benchmark_attention.py):\n   - Compare Flash Attention vs standard PyTorch attention\n   - Test multiple sequence lengths: 512, 1024, 2048, 4096\n   - Test multiple head dimensions: 64, 128\n   - Measure forward and backward pass separately\n   - Output speedup ratios (target: 2.49x-7.47x)\n   - Memory usage comparison\n   \n   Configuration (benchmark_config.yaml):\n   - batch_sizes: [1, 4, 8, 16]\n   - seq_lengths: [512, 1024, 2048, 4096]\n   - head_dim: [64, 128]\n   - num_heads: [8, 12, 16]\n   - dtype: [float16, bfloat16]\n   \n   Optimization Demo (optimization_demo.py):\n   - Demonstrate causal masking optimization\n   - Show memory-efficient backward pass\n   - Include dropout optimization example\n   - Performance timing decorators\n\n4. Output Requirements:\n   - JSON results file with speedup metrics\n   - Memory reduction percentages\n   - Latency comparisons (ms)\n\n## Acceptance Criteria\n   - `python benchmarks/benchmark_attention.py` exits with code 0\n   - Benchmark results show Flash Attention speedup > 2x\n   - Memory reduction > 40% for long sequences\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/flash-attention/.git ]; then cd /workspace/flash-attention && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_v3_performance_optimization",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Flash Attention Performance Benchmark and Optimization Examples\n\n## Background\n   Create performance benchmarks and optimization examples for Flash Attention\n   demonstrating speedup comparisons with standard attention mechanisms.\n\n## Files to Create/Modify\n   - benchmarks/benchmark_attention.py (new)\n   - benchmarks/configs/benchmark_config.yaml (new)\n   - examples/optimization_demo.py (new)\n\n## Requirements\n   \n   Benchmark Script (benchmark_attention.py):\n   - Compare Flash Attention vs standard PyTorch attention\n   - Test multiple sequence lengths: 512, 1024, 2048, 4096\n   - Test multiple head dimensions: 64, 128\n   - Measure forward and backward pass separately\n   - Output speedup ratios (target: 2.49x-7.47x)\n   - Memory usage comparison\n   \n   Configuration (benchmark_config.yaml):\n   - batch_sizes: [1, 4, 8, 16]\n   - seq_lengths: [512, 1024, 2048, 4096]\n   - head_dim: [64, 128]\n   - num_heads: [8, 12, 16]\n   - dtype: [float16, bfloat16]\n   \n   Optimization Demo (optimization_demo.py):\n   - Demonstrate causal masking optimization\n   - Show memory-efficient backward pass\n   - Include dropout optimization example\n   - Performance timing decorators\n\n4. Output Requirements:\n   - JSON results file with speedup metrics\n   - Memory reduction percentages\n   - Latency comparisons (ms)\n\n## Acceptance Criteria\n   - `python benchmarks/benchmark_attention.py` exits with code 0\n   - Benchmark results show Flash Attention speedup > 2x\n   - Memory reduction > 40% for long sequences\n",
+      "/workspace/.skill_id": "v3-performance-optimization"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "v3-performance-optimization",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/v3-performance-optimization/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_v3_performance_optimization.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Flash Attention Performance Benchmark and Optimization Examples\n\n## Background\n   Create performance benchmarks and optimization examples for Flash Attention\n   demonstrating speedup comparisons with standard attention mechanisms.\n\n## Files to Create/Modify\n   - benchmarks/benchmark_attention.py (new)\n   - benchmarks/configs/benchmark_config.yaml (new)\n   - examples/optimization_demo.py (new)\n\n## Requirements\n   \n   Benchmark Script (benchmark_attention.py):\n   - Compare Flash Attention vs standard PyTorch attention\n   - Test multiple sequence lengths: 512, 1024, 2048, 4096\n   - Test multiple head dimensions: 64, 128\n   - Measure forward and backward pass separately\n   - Output speedup ratios (target: 2.49x-7.47x)\n   - Memory usage comparison\n   \n   Configuration (benchmark_config.yaml):\n   - batch_sizes: [1, 4, 8, 16]\n   - seq_lengths: [512, 1024, 2048, 4096]\n   - head_dim: [64, 128]\n   - num_heads: [8, 12, 16]\n   - dtype: [float16, bfloat16]\n   \n   Optimization Demo (optimization_demo.py):\n   - Demonstrate causal masking optimization\n   - Show memory-efficient backward pass\n   - Include dropout optimization example\n   - Performance timing decorators\n\n4. Output Requirements:\n   - JSON results file with speedup metrics\n   - Memory reduction percentages\n   - Latency comparisons (ms)\n\n## Acceptance Criteria\n   - `python benchmarks/benchmark_attention.py` exits with code 0\n   - Benchmark results show Flash Attention speedup > 2x\n   - Memory reduction > 40% for long sequences\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "v3-performance-optimization",
+    "name": "V3 Performance Optimization",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/Dao-AILab/flash-attention",
+    "repo_commit": "abd9943b66704f650ea1485a17126cd3817d1b1d",
+    "repo_root": "/workspace/flash-attention",
+    "human_skill_path": "upstream/skills/v3-performance-optimization/SKILL.md",
+    "sequence": 46
+  }
+}

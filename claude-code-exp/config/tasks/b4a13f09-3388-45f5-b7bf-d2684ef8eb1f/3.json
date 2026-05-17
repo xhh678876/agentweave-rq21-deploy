@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Test the demo script runs successfully",
+  "description": "Run `python examples/similarity_search_demo.py` and verify it exits with code 0, outputs query parameters and latency, and known neighbors appear in top-K results",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

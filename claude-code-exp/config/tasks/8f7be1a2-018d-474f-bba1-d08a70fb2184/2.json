@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create tests/functional/staging/fixtures.py",
+  "description": "Create tests/functional/staging/fixtures.py with model SQL, schema YAML, and custom test SQL",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

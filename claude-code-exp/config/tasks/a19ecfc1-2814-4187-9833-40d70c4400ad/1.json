@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Add unit tests for multi-job config parsing",
+  "description": "Add tests to config/config_test.go for parsing multi-job config, verifying job count, relabel rules, target transformation, and metric_relabel_configs",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

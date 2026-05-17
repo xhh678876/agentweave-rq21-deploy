@@ -1,0 +1,37 @@
+[project]
+name = "agentweave-runner"
+version = "0.1.0"
+description = "AgentWeave method runner: orchestrates M0/M1/M2/M3/M4 x seeds x harnesses for RQ1-RQ4."
+requires-python = ">=3.11,<3.14"
+readme = "README.md"
+dependencies = [
+    # We do not list langgraph here; the LangGraph harness lives in its own
+    # repo and we import it via path injection (see harness.py). This keeps
+    # the runner installable in a clean venv without re-pinning langgraph.
+    "python-dotenv>=1.0.1,<2",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0,<9",
+]
+
+[project.scripts]
+agentweave-runner = "agentweave_runner.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: unit tests (fast, no network)",
+    "integration: integration tests (touches harness, may hit network)",
+    "smoke: end-to-end smoke (slow, hits LLM)",
+]

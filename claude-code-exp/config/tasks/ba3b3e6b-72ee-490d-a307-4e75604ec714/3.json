@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Create settings model for site-currency",
+  "description": "Create src/metabase/models/setting.clj to provide site-currency configuration",
+  "activeForm": "Creating settings model",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

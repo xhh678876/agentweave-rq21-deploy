@@ -1,0 +1,8 @@
+- Buy groceries (normal priority)
+- Fix login bug on production (URGENT)
+- Update team wiki
+- Deploy security patch to all servers (URGENT)
+- Review PR #42
+- Respond to customer outage report (URGENT)
+- Plan team offsite
+- Clean up old branches

@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create DCFDemo.cpp with QuantLib DCF valuation example",
+  "description": "Write the main C++ example demonstrating: FlatForward term structure, Schedule, FixedRateCoupon, CashFlows::npv, terminal value, sensitivity analysis, duration/convexity",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

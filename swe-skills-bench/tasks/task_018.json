@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_implementing_agent_modes",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/posthog\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Agent Batch Processing Mode for PostHog\n\n## Background\n   Add batch event processing\n   capabilities for agent mode, enabling efficient bulk event capture\n   with configurable batching parameters.\n\n## Files to Create/Modify\n   - posthog/api/capture.py (batch endpoint addition)\n   - posthog/settings/batch_config.py (new configuration)\n   - posthog/tests/test_batch_capture.py (new tests)\n\n## Requirements\n   \n   Batch Capture Endpoint:\n   - POST /batch endpoint for bulk events\n   - Accept array of events in request body\n   - Maximum batch size: 100 events\n   - Validate each event in batch\n   \n   Configuration (batch_config.py):\n   - BATCH_MAX_SIZE: Maximum events per batch\n   - BATCH_TIMEOUT_MS: Timeout for batch processing\n   - BATCH_RETRY_COUNT: Retry attempts on failure\n   - Environment variable overrides\n   \n   Batch Processing Logic:\n   - Atomic batch processing (all or nothing)\n   - Individual event validation\n   - Detailed error response for invalid events\n   - Performance metrics logging\n\n### Expected Functionality\n\n   - Valid batch succeeds with 200 OK\n   - Oversized batch returns 400 Bad Request\n   - Invalid event in batch returns detailed error\n   - Partial failure handling\n\n## Acceptance Criteria\n   - `python manage.py test posthog.tests.test_batch_capture` works correctly\n   - Batch endpoint handles 100 events in <500ms\n   - Configuration is properly documented\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/posthog/.git ]; then cd /workspace/posthog && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_implementing_agent_modes",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Agent Batch Processing Mode for PostHog\n\n## Background\n   Add batch event processing\n   capabilities for agent mode, enabling efficient bulk event capture\n   with configurable batching parameters.\n\n## Files to Create/Modify\n   - posthog/api/capture.py (batch endpoint addition)\n   - posthog/settings/batch_config.py (new configuration)\n   - posthog/tests/test_batch_capture.py (new tests)\n\n## Requirements\n   \n   Batch Capture Endpoint:\n   - POST /batch endpoint for bulk events\n   - Accept array of events in request body\n   - Maximum batch size: 100 events\n   - Validate each event in batch\n   \n   Configuration (batch_config.py):\n   - BATCH_MAX_SIZE: Maximum events per batch\n   - BATCH_TIMEOUT_MS: Timeout for batch processing\n   - BATCH_RETRY_COUNT: Retry attempts on failure\n   - Environment variable overrides\n   \n   Batch Processing Logic:\n   - Atomic batch processing (all or nothing)\n   - Individual event validation\n   - Detailed error response for invalid events\n   - Performance metrics logging\n\n### Expected Functionality\n\n   - Valid batch succeeds with 200 OK\n   - Oversized batch returns 400 Bad Request\n   - Invalid event in batch returns detailed error\n   - Partial failure handling\n\n## Acceptance Criteria\n   - `python manage.py test posthog.tests.test_batch_capture` works correctly\n   - Batch endpoint handles 100 events in <500ms\n   - Configuration is properly documented\n",
+      "/workspace/.skill_id": "implementing-agent-modes"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "implementing-agent-modes",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/implementing-agent-modes/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_implementing_agent_modes.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Agent Batch Processing Mode for PostHog\n\n## Background\n   Add batch event processing\n   capabilities for agent mode, enabling efficient bulk event capture\n   with configurable batching parameters.\n\n## Files to Create/Modify\n   - posthog/api/capture.py (batch endpoint addition)\n   - posthog/settings/batch_config.py (new configuration)\n   - posthog/tests/test_batch_capture.py (new tests)\n\n## Requirements\n   \n   Batch Capture Endpoint:\n   - POST /batch endpoint for bulk events\n   - Accept array of events in request body\n   - Maximum batch size: 100 events\n   - Validate each event in batch\n   \n   Configuration (batch_config.py):\n   - BATCH_MAX_SIZE: Maximum events per batch\n   - BATCH_TIMEOUT_MS: Timeout for batch processing\n   - BATCH_RETRY_COUNT: Retry attempts on failure\n   - Environment variable overrides\n   \n   Batch Processing Logic:\n   - Atomic batch processing (all or nothing)\n   - Individual event validation\n   - Detailed error response for invalid events\n   - Performance metrics logging\n\n### Expected Functionality\n\n   - Valid batch succeeds with 200 OK\n   - Oversized batch returns 400 Bad Request\n   - Invalid event in batch returns detailed error\n   - Partial failure handling\n\n## Acceptance Criteria\n   - `python manage.py test posthog.tests.test_batch_capture` works correctly\n   - Batch endpoint handles 100 events in <500ms\n   - Configuration is properly documented\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "implementing-agent-modes",
+    "name": "PostHog Agent Mode Architect",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/PostHog/posthog",
+    "repo_commit": "ded7ef313da2a3b04ff0af9e781619a30dae3517",
+    "repo_root": "/workspace/posthog",
+    "human_skill_path": "upstream/skills/implementing-agent-modes/SKILL.md",
+    "sequence": 18
+  }
+}

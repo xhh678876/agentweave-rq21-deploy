@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create core/dbt/tests/staging/ fixture files",
+  "description": "Create stg_orders.sql and schema.yml in core/dbt/tests/staging/",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

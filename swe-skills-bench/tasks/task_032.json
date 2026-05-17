@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_python_observability",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/opentelemetry-python\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add End-to-End Observability Demo for OpenTelemetry Python\n\n## Background\n\nAdd a comprehensive observability demonstration script to the opentelemetry-python repository that shows manual instrumentation with tracing, context propagation, and metric collection.\n\n## Files to Create/Modify\n\n- `docs/examples/observability_demo.py` - Main demo script combining tracing and context propagation\n\n## Requirements\n\n### Tracing\n- `TracerProvider` configuration with `ConsoleSpanExporter`\n- Creating and nesting spans\n- Adding span attributes and events\n- Exception recording with proper span status\n\n### Context Propagation\n- W3C TraceContext format (`traceparent`, `tracestate` headers)\n- HTTP header injection for outgoing requests\n- Context extraction from incoming request headers\n- Cross-service trace correlation demonstration\n\n### Additional Features\n- Span links for async workflows\n- Baggage for cross-cutting data\n- Resource detection\n- Proper span error handling and status codes\n\n### Output\n- The script must produce trace output with valid `trace_id` format (32-char hex)\n- Nested spans must appear with correct parent relationships\n\n## Acceptance Criteria\n\n- `python docs/examples/observability_demo.py` exits with code 0\n- Output shows `trace_id` in correct 32-character hex format\n- Spans are properly nested and context propagates correctly\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/opentelemetry-python/.git ]; then cd /workspace/opentelemetry-python && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_python_observability",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add End-to-End Observability Demo for OpenTelemetry Python\n\n## Background\n\nAdd a comprehensive observability demonstration script to the opentelemetry-python repository that shows manual instrumentation with tracing, context propagation, and metric collection.\n\n## Files to Create/Modify\n\n- `docs/examples/observability_demo.py` - Main demo script combining tracing and context propagation\n\n## Requirements\n\n### Tracing\n- `TracerProvider` configuration with `ConsoleSpanExporter`\n- Creating and nesting spans\n- Adding span attributes and events\n- Exception recording with proper span status\n\n### Context Propagation\n- W3C TraceContext format (`traceparent`, `tracestate` headers)\n- HTTP header injection for outgoing requests\n- Context extraction from incoming request headers\n- Cross-service trace correlation demonstration\n\n### Additional Features\n- Span links for async workflows\n- Baggage for cross-cutting data\n- Resource detection\n- Proper span error handling and status codes\n\n### Output\n- The script must produce trace output with valid `trace_id` format (32-char hex)\n- Nested spans must appear with correct parent relationships\n\n## Acceptance Criteria\n\n- `python docs/examples/observability_demo.py` exits with code 0\n- Output shows `trace_id` in correct 32-character hex format\n- Spans are properly nested and context propagates correctly\n",
+      "/workspace/.skill_id": "python-observability"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "python-observability",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/python-observability/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_python_observability.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add End-to-End Observability Demo for OpenTelemetry Python\n\n## Background\n\nAdd a comprehensive observability demonstration script to the opentelemetry-python repository that shows manual instrumentation with tracing, context propagation, and metric collection.\n\n## Files to Create/Modify\n\n- `docs/examples/observability_demo.py` - Main demo script combining tracing and context propagation\n\n## Requirements\n\n### Tracing\n- `TracerProvider` configuration with `ConsoleSpanExporter`\n- Creating and nesting spans\n- Adding span attributes and events\n- Exception recording with proper span status\n\n### Context Propagation\n- W3C TraceContext format (`traceparent`, `tracestate` headers)\n- HTTP header injection for outgoing requests\n- Context extraction from incoming request headers\n- Cross-service trace correlation demonstration\n\n### Additional Features\n- Span links for async workflows\n- Baggage for cross-cutting data\n- Resource detection\n- Proper span error handling and status codes\n\n### Output\n- The script must produce trace output with valid `trace_id` format (32-char hex)\n- Nested spans must appear with correct parent relationships\n\n## Acceptance Criteria\n\n- `python docs/examples/observability_demo.py` exits with code 0\n- Output shows `trace_id` in correct 32-character hex format\n- Spans are properly nested and context propagates correctly\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "python-observability",
+    "name": "Python Observability Patterns",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/open-telemetry/opentelemetry-python",
+    "repo_commit": "742593b01f47cc47a8bc8d8f3057297258357192",
+    "repo_root": "/workspace/opentelemetry-python",
+    "human_skill_path": "upstream/skills/python-observability/SKILL.md",
+    "sequence": 32
+  }
+}

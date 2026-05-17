@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create Django project structure for PostHog",
+  "description": "Create manage.py, settings, urls, wsgi and directory structure",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

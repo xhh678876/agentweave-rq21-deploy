@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_security_review",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/babybuddy\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Implement Secure Export API Endpoints for BabyBuddy\n\n## Background\n\nWe need to add export endpoints to BabyBuddy's REST API that allow users to export feeding and sleep records. The implementation must enforce proper authentication and authorization to ensure users can only access their own children's data.\n\n## Files to Modify\n\n- `api/serializers.py` - Add FeedingExportSerializer and SleepExportSerializer\n- `api/views.py` - Add ExportViewSet\n- `api/urls.py` - Register export routes\n- `tests/test_api.py` - Add security test cases\n\n## Requirements\n\n### API Endpoint\n\n- `GET /api/child/{child_id}/export/?type=feeding|sleep`\n- Returns last 30 days of records in JSON format\n\n### Security Requirements\n\n- Use Django Permission to validate authenticated users\n- Users can ONLY access their own children's data\n- Proper HTTP status codes for different scenarios:\n  - Authenticated user accessing own child's data → 200 OK\n  - Unauthenticated request → 401 Unauthorized\n  - User accessing another user's child data → 403 Forbidden\n\n### Serializers\n\n- **FeedingExportSerializer**: id, start, end, duration, type, method, amount\n- **SleepExportSerializer**: id, start, end, duration, quality\n\n## Acceptance Criteria\n\n- `python manage.py test babybuddy.tests.test_api -v 2` passes with all tests successful\n- Export endpoint returns correct JSON structure\n- Security checks properly implemented and tested\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/babybuddy/.git ]; then cd /workspace/babybuddy && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_security_review",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Implement Secure Export API Endpoints for BabyBuddy\n\n## Background\n\nWe need to add export endpoints to BabyBuddy's REST API that allow users to export feeding and sleep records. The implementation must enforce proper authentication and authorization to ensure users can only access their own children's data.\n\n## Files to Modify\n\n- `api/serializers.py` - Add FeedingExportSerializer and SleepExportSerializer\n- `api/views.py` - Add ExportViewSet\n- `api/urls.py` - Register export routes\n- `tests/test_api.py` - Add security test cases\n\n## Requirements\n\n### API Endpoint\n\n- `GET /api/child/{child_id}/export/?type=feeding|sleep`\n- Returns last 30 days of records in JSON format\n\n### Security Requirements\n\n- Use Django Permission to validate authenticated users\n- Users can ONLY access their own children's data\n- Proper HTTP status codes for different scenarios:\n  - Authenticated user accessing own child's data → 200 OK\n  - Unauthenticated request → 401 Unauthorized\n  - User accessing another user's child data → 403 Forbidden\n\n### Serializers\n\n- **FeedingExportSerializer**: id, start, end, duration, type, method, amount\n- **SleepExportSerializer**: id, start, end, duration, quality\n\n## Acceptance Criteria\n\n- `python manage.py test babybuddy.tests.test_api -v 2` passes with all tests successful\n- Export endpoint returns correct JSON structure\n- Security checks properly implemented and tested\n",
+      "/workspace/.skill_id": "security-review"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "security-review",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/security-review/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_security_review.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Implement Secure Export API Endpoints for BabyBuddy\n\n## Background\n\nWe need to add export endpoints to BabyBuddy's REST API that allow users to export feeding and sleep records. The implementation must enforce proper authentication and authorization to ensure users can only access their own children's data.\n\n## Files to Modify\n\n- `api/serializers.py` - Add FeedingExportSerializer and SleepExportSerializer\n- `api/views.py` - Add ExportViewSet\n- `api/urls.py` - Register export routes\n- `tests/test_api.py` - Add security test cases\n\n## Requirements\n\n### API Endpoint\n\n- `GET /api/child/{child_id}/export/?type=feeding|sleep`\n- Returns last 30 days of records in JSON format\n\n### Security Requirements\n\n- Use Django Permission to validate authenticated users\n- Users can ONLY access their own children's data\n- Proper HTTP status codes for different scenarios:\n  - Authenticated user accessing own child's data → 200 OK\n  - Unauthenticated request → 401 Unauthorized\n  - User accessing another user's child data → 403 Forbidden\n\n### Serializers\n\n- **FeedingExportSerializer**: id, start, end, duration, type, method, amount\n- **SleepExportSerializer**: id, start, end, duration, quality\n\n## Acceptance Criteria\n\n- `python manage.py test babybuddy.tests.test_api -v 2` passes with all tests successful\n- Export endpoint returns correct JSON structure\n- Security checks properly implemented and tested\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "security-review",
+    "name": "Security Review (zh-TW)",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/babybuddy/babybuddy",
+    "repo_commit": "b307200149ae92d0d95dfde82e320d5401148dcf",
+    "repo_root": "/workspace/babybuddy",
+    "human_skill_path": "upstream/skills/security-review/SKILL.md",
+    "sequence": 38
+  }
+}

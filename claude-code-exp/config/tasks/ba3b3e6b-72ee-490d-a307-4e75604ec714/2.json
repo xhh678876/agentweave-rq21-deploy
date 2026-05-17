@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Create dataset API with CSV/JSON export",
+  "description": "Create src/metabase/api/dataset.clj with POST /api/dataset/csv and POST /api/dataset/json endpoints that call currency formatter middleware",
+  "activeForm": "Creating dataset API with export endpoints",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

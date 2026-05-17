@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create directory structure for python-bazel example",
+  "description": "Create examples/python-bazel/ and subdirectories src/ and tests/",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

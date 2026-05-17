@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create currency formatter middleware",
+  "description": "Create src/metabase/query_processor/middleware/currency_formatter.clj with exchange rates, conversion logic, and result processing",
+  "activeForm": "Creating currency formatter middleware",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

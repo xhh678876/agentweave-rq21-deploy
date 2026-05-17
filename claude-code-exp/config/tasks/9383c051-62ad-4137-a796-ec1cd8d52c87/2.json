@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Clone QuantLib source repository",
+  "description": "Clone QuantLib repo to get the source tree with Examples directory",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

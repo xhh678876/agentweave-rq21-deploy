@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Set up upgradle project structure",
+  "description": "Create package.json, tsconfig.json, .eslintrc.json, and src/ directory with TypeScript files containing ESLint violations",
+  "activeForm": "Setting up upgradle project structure",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Implement currency_formatter.clj middleware",
+  "description": "Create the core currency formatter middleware with exchange rates, conversion logic, and column handling",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

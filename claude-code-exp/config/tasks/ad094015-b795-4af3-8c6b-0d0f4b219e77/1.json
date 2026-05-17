@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create benchs/index_tuning_demo.py",
+  "description": "Create the main benchmark script that demonstrates recall vs latency trade-offs for Flat, IVF, HNSW, and PQ FAISS indexes.",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

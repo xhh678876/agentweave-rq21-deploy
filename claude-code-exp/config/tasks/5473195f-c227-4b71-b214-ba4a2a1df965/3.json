@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Fix ESLint violations in utils.ts",
+  "description": "Fix any types, == to ===, remove unused vars",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

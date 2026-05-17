@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create benchmarks/benchmark_attention.py",
+  "description": "Benchmark script comparing Flash Attention vs standard PyTorch attention with speedup ratios, memory comparison, JSON output",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

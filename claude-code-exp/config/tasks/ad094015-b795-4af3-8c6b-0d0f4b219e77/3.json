@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create tools/benchmark_index.py (optional)",
+  "description": "Optional helper tool for running index benchmarks.",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

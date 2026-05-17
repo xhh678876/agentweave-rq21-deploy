@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Test and verify the RAG demo",
+  "description": "Run `python examples/rag_demo.py` and verify it exits with code 0, output contains retrieved context snippets and source citations",
+  "activeForm": "Testing the RAG demo",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

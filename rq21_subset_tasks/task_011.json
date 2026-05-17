@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_distributed_tracing",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/opentelemetry-collector\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add OpenTelemetry Collector Pipeline Configuration Example\n\n## Background\n   Add a complete collector pipeline\n   configuration example demonstrating receivers, processors, and exporters\n   in the OpenTelemetry Collector repository.\n\n## Files to Create/Modify\n   - examples/pipeline-demo/config.yaml (collector configuration)\n   - examples/pipeline-demo/README.md (documentation)\n   - examples/pipeline-demo/docker-compose.yaml (optional local setup)\n\n## Requirements\n   \n   Collector Configuration (config.yaml):\n   \n   Receivers:\n   - otlp: gRPC and HTTP protocols\n   - prometheus: Prometheus scrape endpoint\n   - jaeger: Jaeger thrift receiver\n   \n   Processors:\n   - batch: Batch telemetry data\n   - memory_limiter: Limit memory usage\n   - attributes: Add/modify span attributes\n   - filter: Drop unwanted telemetry\n   \n   Exporters:\n   - otlp: Send to OTLP endpoint\n   - prometheus: Expose Prometheus endpoint\n   - logging: Debug output\n   \n   Pipelines:\n   - traces: otlp -> batch -> otlp\n   - metrics: prometheus -> memory_limiter -> prometheus\n   - logs: otlp -> filter -> logging\n\n4. Configuration Features:\n   - Multi-pipeline setup\n   - Batch configuration tuning\n   - Memory limits for production\n   - TLS configuration placeholders\n\n## Acceptance Criteria\n   - `otelcol validate --config examples/pipeline-demo/config.yaml` exits with code 0\n   - All receivers, processors, exporters properly configured\n   - README explains each pipeline component\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/opentelemetry-collector/.git ]; then cd /workspace/opentelemetry-collector && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_distributed_tracing",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add OpenTelemetry Collector Pipeline Configuration Example\n\n## Background\n   Add a complete collector pipeline\n   configuration example demonstrating receivers, processors, and exporters\n   in the OpenTelemetry Collector repository.\n\n## Files to Create/Modify\n   - examples/pipeline-demo/config.yaml (collector configuration)\n   - examples/pipeline-demo/README.md (documentation)\n   - examples/pipeline-demo/docker-compose.yaml (optional local setup)\n\n## Requirements\n   \n   Collector Configuration (config.yaml):\n   \n   Receivers:\n   - otlp: gRPC and HTTP protocols\n   - prometheus: Prometheus scrape endpoint\n   - jaeger: Jaeger thrift receiver\n   \n   Processors:\n   - batch: Batch telemetry data\n   - memory_limiter: Limit memory usage\n   - attributes: Add/modify span attributes\n   - filter: Drop unwanted telemetry\n   \n   Exporters:\n   - otlp: Send to OTLP endpoint\n   - prometheus: Expose Prometheus endpoint\n   - logging: Debug output\n   \n   Pipelines:\n   - traces: otlp -> batch -> otlp\n   - metrics: prometheus -> memory_limiter -> prometheus\n   - logs: otlp -> filter -> logging\n\n4. Configuration Features:\n   - Multi-pipeline setup\n   - Batch configuration tuning\n   - Memory limits for production\n   - TLS configuration placeholders\n\n## Acceptance Criteria\n   - `otelcol validate --config examples/pipeline-demo/config.yaml` exits with code 0\n   - All receivers, processors, exporters properly configured\n   - README explains each pipeline component\n",
+      "/workspace/.skill_id": "distributed-tracing"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "distributed-tracing",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "human_skill_path": "upstream/skills/distributed-tracing/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_distributed_tracing.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add OpenTelemetry Collector Pipeline Configuration Example\n\n## Background\n   Add a complete collector pipeline\n   configuration example demonstrating receivers, processors, and exporters\n   in the OpenTelemetry Collector repository.\n\n## Files to Create/Modify\n   - examples/pipeline-demo/config.yaml (collector configuration)\n   - examples/pipeline-demo/README.md (documentation)\n   - examples/pipeline-demo/docker-compose.yaml (optional local setup)\n\n## Requirements\n   \n   Collector Configuration (config.yaml):\n   \n   Receivers:\n   - otlp: gRPC and HTTP protocols\n   - prometheus: Prometheus scrape endpoint\n   - jaeger: Jaeger thrift receiver\n   \n   Processors:\n   - batch: Batch telemetry data\n   - memory_limiter: Limit memory usage\n   - attributes: Add/modify span attributes\n   - filter: Drop unwanted telemetry\n   \n   Exporters:\n   - otlp: Send to OTLP endpoint\n   - prometheus: Expose Prometheus endpoint\n   - logging: Debug output\n   \n   Pipelines:\n   - traces: otlp -> batch -> otlp\n   - metrics: prometheus -> memory_limiter -> prometheus\n   - logs: otlp -> filter -> logging\n\n4. Configuration Features:\n   - Multi-pipeline setup\n   - Batch configuration tuning\n   - Memory limits for production\n   - TLS configuration placeholders\n\n## Acceptance Criteria\n   - `otelcol validate --config examples/pipeline-demo/config.yaml` exits with code 0\n   - All receivers, processors, exporters properly configured\n   - README explains each pipeline component\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "distributed-tracing",
+    "name": "Distributed Tracing & Observability",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "repo_url": "https://github.com/open-telemetry/opentelemetry-collector",
+    "repo_commit": "01ca8295bb51a66326354322b829b1e2cd2cf7aa",
+    "repo_root": "/workspace/opentelemetry-collector",
+    "human_skill_path": "upstream/skills/distributed-tracing/SKILL.md",
+    "sequence": 11
+  }
+}

@@ -1,0 +1,8 @@
+model_provider = "deepseek"
+model = "deepseek-v4-flash"
+
+[model_providers.deepseek]
+name = "DeepSeek"
+base_url = "http://127.0.0.1:8765/v1"
+wire_api = "chat"
+env_key = "OPENAI_API_KEY"

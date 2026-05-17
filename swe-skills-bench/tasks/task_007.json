@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_changelog_automation",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/github-changelog-generator\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add GitHub Changelog Generator Configuration Example\n\n## Background\n   Add a complete changelog generation\n   configuration example demonstrating the github-changelog-generator\n   tool's capabilities and customization options.\n\n## Files to Create/Modify\n   - examples/advanced_config/.github_changelog_generator (configuration)\n   - examples/advanced_config/CHANGELOG.md (sample output)\n   - examples/advanced_config/README.md (documentation)\n\n## Requirements\n   \n   Configuration File (.github_changelog_generator):\n   - user and project settings\n   - since_tag and due_tag options\n   - issue/PR label filtering\n   - Section customization (enhancement, bug, etc.)\n   \n   Label Configuration:\n   - enhancement-labels: [\"enhancement\", \"feature\"]\n   - bug-labels: [\"bug\", \"fix\"]\n   - breaking-labels: [\"breaking-change\"]\n   - exclude-labels: [\"duplicate\", \"wontfix\"]\n   \n   Output Formatting:\n   - Custom header template\n   - Date format configuration\n   - Compare URL inclusion\n   - Unreleased section handling\n\n4. Configuration Options to Demonstrate:\n   - unreleased: true/false\n   - base: HISTORY.md (optional base file)\n   - header: Custom header text\n   - include_labels: Label filtering\n   - breaking_prefix: \"**Breaking Changes:**\"\n\n## Acceptance Criteria\n   - Configuration file is valid and parseable\n   - README explains each configuration option\n   - `github_changelog_generator --config examples/advanced_config/.github_changelog_generator --help` validates\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/github-changelog-generator/.git ]; then cd /workspace/github-changelog-generator && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_changelog_automation",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add GitHub Changelog Generator Configuration Example\n\n## Background\n   Add a complete changelog generation\n   configuration example demonstrating the github-changelog-generator\n   tool's capabilities and customization options.\n\n## Files to Create/Modify\n   - examples/advanced_config/.github_changelog_generator (configuration)\n   - examples/advanced_config/CHANGELOG.md (sample output)\n   - examples/advanced_config/README.md (documentation)\n\n## Requirements\n   \n   Configuration File (.github_changelog_generator):\n   - user and project settings\n   - since_tag and due_tag options\n   - issue/PR label filtering\n   - Section customization (enhancement, bug, etc.)\n   \n   Label Configuration:\n   - enhancement-labels: [\"enhancement\", \"feature\"]\n   - bug-labels: [\"bug\", \"fix\"]\n   - breaking-labels: [\"breaking-change\"]\n   - exclude-labels: [\"duplicate\", \"wontfix\"]\n   \n   Output Formatting:\n   - Custom header template\n   - Date format configuration\n   - Compare URL inclusion\n   - Unreleased section handling\n\n4. Configuration Options to Demonstrate:\n   - unreleased: true/false\n   - base: HISTORY.md (optional base file)\n   - header: Custom header text\n   - include_labels: Label filtering\n   - breaking_prefix: \"**Breaking Changes:**\"\n\n## Acceptance Criteria\n   - Configuration file is valid and parseable\n   - README explains each configuration option\n   - `github_changelog_generator --config examples/advanced_config/.github_changelog_generator --help` validates\n",
+      "/workspace/.skill_id": "changelog-automation"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "changelog-automation",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "human_skill_path": "upstream/skills/changelog-automation/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_changelog_automation.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add GitHub Changelog Generator Configuration Example\n\n## Background\n   Add a complete changelog generation\n   configuration example demonstrating the github-changelog-generator\n   tool's capabilities and customization options.\n\n## Files to Create/Modify\n   - examples/advanced_config/.github_changelog_generator (configuration)\n   - examples/advanced_config/CHANGELOG.md (sample output)\n   - examples/advanced_config/README.md (documentation)\n\n## Requirements\n   \n   Configuration File (.github_changelog_generator):\n   - user and project settings\n   - since_tag and due_tag options\n   - issue/PR label filtering\n   - Section customization (enhancement, bug, etc.)\n   \n   Label Configuration:\n   - enhancement-labels: [\"enhancement\", \"feature\"]\n   - bug-labels: [\"bug\", \"fix\"]\n   - breaking-labels: [\"breaking-change\"]\n   - exclude-labels: [\"duplicate\", \"wontfix\"]\n   \n   Output Formatting:\n   - Custom header template\n   - Date format configuration\n   - Compare URL inclusion\n   - Unreleased section handling\n\n4. Configuration Options to Demonstrate:\n   - unreleased: true/false\n   - base: HISTORY.md (optional base file)\n   - header: Custom header text\n   - include_labels: Label filtering\n   - breaking_prefix: \"**Breaking Changes:**\"\n\n## Acceptance Criteria\n   - Configuration file is valid and parseable\n   - README explains each configuration option\n   - `github_changelog_generator --config examples/advanced_config/.github_changelog_generator --help` validates\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "changelog-automation",
+    "name": "Changelog Automation",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+    "repo_url": "https://github.com/github-changelog-generator/github-changelog-generator",
+    "repo_commit": "5a0cbdb6860ffc449e838541faf3f24e10d75722",
+    "repo_root": "/workspace/github-changelog-generator",
+    "human_skill_path": "upstream/skills/changelog-automation/SKILL.md",
+    "sequence": 7
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Implement rag_demo.py script",
+  "description": "Implement examples/rag_demo.py with data import, retriever config (FAISS + FakeEmbeddings), and generation pipeline (RetrievalQA + FakeListLLM) with source citations",
+  "activeForm": "Implementing RAG demo script",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

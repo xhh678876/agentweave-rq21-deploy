@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swe-skills-bridge"
+version = "0.1.0"
+description = "Bridge between SWE-Skills-Bench and AgentWeave's runner/pipeline infrastructure"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "docker>=7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "black>=24.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+swe-skills-bridge = "swe_skills_bridge.cli:cli"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+swe_skills_bridge = ["*.json", "*.md"]
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: fast tests, no network/docker/LLM",
+    "integration: requires docker + LLM credentials",
+]

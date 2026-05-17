@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create similarity_search_demo.py script",
+  "description": "Create demo script that connects to Milvus, creates collection, builds index, inserts test vectors, runs similarity queries, validates results, and logs parameters/latency",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

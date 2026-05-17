@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Claude Code 实验 wrapper — 用 DeepSeek V4 Pro
+EXP_ROOT="$(dirname "$(dirname "$(realpath "$0")")")"
+
+# 读 .env
+set -a
+. "$EXP_ROOT/config/.env"
+set +a
+
+export CLAUDE_CONFIG_DIR="$EXP_ROOT/config"
+
+# 调真 claude binary
+exec "$EXP_ROOT/node_modules/.bin/claude" "$@"

@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_tdd_workflow",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/python\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Implement Smart Coupon Calculator\n\n## Required File Paths (Agent must only modify/create under these)\n\n- MUST modify: `src/calculator.py` — implement or update `SmartCouponCalculator` here.\n\n\n## Background\n\nWe need a flexible discount calculation system for our e-commerce platform that can handle multiple promotion strategies simultaneously.\n\n## Objective\n\nImplement a `SmartCouponCalculator` class in `src/calculator.py` that supports the following discount strategies:\n\n### Discount Rules\n\n1. **Progressive Discount**\n   - $10 off when order total ≥ $100\n   - Additional $15 off (total $25 off) when order total ≥ $200\n\n2. **Category Discount**\n   - 10% off for items in specified promotional categories\n\n3. **User Tier Discount**\n   - VIP members: 5% off final price\n   - SVIP members: 10% off final price\n\nWhen multiple discounts apply, they should be stacked optimally to maximize customer savings.\n\n## Implementation Requirements\n\n### Core Functionality\n- Calculate final price with all applicable discounts\n- Support user tier levels: regular, VIP, SVIP\n- Handle category-specific discounts\n- Apply progressive discounts based on order total\n- Implement optimal discount stacking logic\n\n### Edge Cases to Handle\n- Zero or negative amounts\n- Empty shopping carts\n- Invalid user tier values\n- Items without category information\n\n## Acceptance Criteria\n\n- Calculator correctly applies all three discount types\n- Discount stacking produces accurate final prices for complex scenarios\n- Edge cases are handled gracefully without errors\n- Code is maintainable and follows Python best practices\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/python/.git ]; then cd /workspace/python && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_tdd_workflow",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Implement Smart Coupon Calculator\n\n## Required File Paths (Agent must only modify/create under these)\n\n- MUST modify: `src/calculator.py` — implement or update `SmartCouponCalculator` here.\n\n\n## Background\n\nWe need a flexible discount calculation system for our e-commerce platform that can handle multiple promotion strategies simultaneously.\n\n## Objective\n\nImplement a `SmartCouponCalculator` class in `src/calculator.py` that supports the following discount strategies:\n\n### Discount Rules\n\n1. **Progressive Discount**\n   - $10 off when order total ≥ $100\n   - Additional $15 off (total $25 off) when order total ≥ $200\n\n2. **Category Discount**\n   - 10% off for items in specified promotional categories\n\n3. **User Tier Discount**\n   - VIP members: 5% off final price\n   - SVIP members: 10% off final price\n\nWhen multiple discounts apply, they should be stacked optimally to maximize customer savings.\n\n## Implementation Requirements\n\n### Core Functionality\n- Calculate final price with all applicable discounts\n- Support user tier levels: regular, VIP, SVIP\n- Handle category-specific discounts\n- Apply progressive discounts based on order total\n- Implement optimal discount stacking logic\n\n### Edge Cases to Handle\n- Zero or negative amounts\n- Empty shopping carts\n- Invalid user tier values\n- Items without category information\n\n## Acceptance Criteria\n\n- Calculator correctly applies all three discount types\n- Discount stacking produces accurate final prices for complex scenarios\n- Edge cases are handled gracefully without errors\n- Code is maintainable and follows Python best practices\n",
+      "/workspace/.skill_id": "tdd-workflow"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "tdd-workflow",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/tdd-workflow/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_tdd_workflow.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Implement Smart Coupon Calculator\n\n## Required File Paths (Agent must only modify/create under these)\n\n- MUST modify: `src/calculator.py` — implement or update `SmartCouponCalculator` here.\n\n\n## Background\n\nWe need a flexible discount calculation system for our e-commerce platform that can handle multiple promotion strategies simultaneously.\n\n## Objective\n\nImplement a `SmartCouponCalculator` class in `src/calculator.py` that supports the following discount strategies:\n\n### Discount Rules\n\n1. **Progressive Discount**\n   - $10 off when order total ≥ $100\n   - Additional $15 off (total $25 off) when order total ≥ $200\n\n2. **Category Discount**\n   - 10% off for items in specified promotional categories\n\n3. **User Tier Discount**\n   - VIP members: 5% off final price\n   - SVIP members: 10% off final price\n\nWhen multiple discounts apply, they should be stacked optimally to maximize customer savings.\n\n## Implementation Requirements\n\n### Core Functionality\n- Calculate final price with all applicable discounts\n- Support user tier levels: regular, VIP, SVIP\n- Handle category-specific discounts\n- Apply progressive discounts based on order total\n- Implement optimal discount stacking logic\n\n### Edge Cases to Handle\n- Zero or negative amounts\n- Empty shopping carts\n- Invalid user tier values\n- Items without category information\n\n## Acceptance Criteria\n\n- Calculator correctly applies all three discount types\n- Discount stacking produces accurate final prices for complex scenarios\n- Edge cases are handled gracefully without errors\n- Code is maintainable and follows Python best practices\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "tdd-workflow",
+    "name": "TDD Workflow",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/tdd-starters/python",
+    "repo_commit": "a1a2d04ae69bd50aba9dac2783737dfda8f048c9",
+    "repo_root": "/workspace/python",
+    "human_skill_path": "upstream/skills/tdd-workflow/SKILL.md",
+    "sequence": 44
+  }
+}

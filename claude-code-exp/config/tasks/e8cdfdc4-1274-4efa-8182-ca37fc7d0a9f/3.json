@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create examples/optimization_demo.py",
+  "description": "Optimization demo with causal masking, memory-efficient backward pass, dropout optimization, timing decorators",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

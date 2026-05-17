@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Verify scripts pass shellcheck --severity=warning",
+  "description": "Run shellcheck on both scripts and ensure exit code 0 with no warnings",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

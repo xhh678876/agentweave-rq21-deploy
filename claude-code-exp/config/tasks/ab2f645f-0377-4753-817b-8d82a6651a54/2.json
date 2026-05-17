@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create RAG config YAML",
+  "description": "Create examples/rag_config.yaml with configurable parameters",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_prometheus_configuration",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/prometheus\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Multi-Job Scrape Configuration Example for Prometheus\n\n## Background\n   Add a comprehensive scrape configuration example demonstrating multi-job\n   setup with relabeling rules, and add unit tests to verify configuration parsing.\n\n## Files to Create/Modify\n   - documentation/examples/multi-job-prometheus.yml - Configuration example\n   - config/config_test.go - Add parsing unit tests\n\n## Requirements\n   \n   Configuration Example (multi-job-prometheus.yml):\n   \n   Multiple Scrape Jobs:\n   1) prometheus (self-monitoring)\n   2) node-exporter (static_configs)\n   3) kubernetes-pods (with relabel_configs)\n   \n   Required Sections:\n   ```yaml\n   scrape_configs:\n     - job_name: 'prometheus'\n       static_configs:\n         - targets: ['localhost:9090']\n     \n     - job_name: 'node-exporter'\n       static_configs:\n         - targets: ['node1:9100', 'node2:9100']\n       relabel_configs:\n         - source_labels: [__address__]\n           target_label: instance\n           regex: '([^:]+):\\d+'\n           replacement: '${1}'\n     \n     - job_name: 'kubernetes-pods'\n       metric_relabel_configs:\n         - source_labels: [__name__]\n           regex: 'go_.*'\n           action: drop\n   ```\n   \n   Relabeling Features to Demonstrate:\n   - source_labels and target_label\n   - regex matching and replacement\n   - metric_relabel_configs for metric filtering\n   - action: keep/drop/replace\n\n4. Test Cases (in config_test.go):\n   - Configuration parses without errors\n   - Job count matches expected (3 jobs)\n   - Relabeling rules applied in correct sequence\n   - Target labels transformed correctly\n   - metric_relabel_configs filtering works\n\n## Acceptance Criteria\n   - `go test ./config/...` passes all tests including new ones (exit 0)\n   - Configuration example is valid YAML\n   - Relabeling transformation results match expected values\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/prometheus/.git ]; then cd /workspace/prometheus && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_prometheus_configuration",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Multi-Job Scrape Configuration Example for Prometheus\n\n## Background\n   Add a comprehensive scrape configuration example demonstrating multi-job\n   setup with relabeling rules, and add unit tests to verify configuration parsing.\n\n## Files to Create/Modify\n   - documentation/examples/multi-job-prometheus.yml - Configuration example\n   - config/config_test.go - Add parsing unit tests\n\n## Requirements\n   \n   Configuration Example (multi-job-prometheus.yml):\n   \n   Multiple Scrape Jobs:\n   1) prometheus (self-monitoring)\n   2) node-exporter (static_configs)\n   3) kubernetes-pods (with relabel_configs)\n   \n   Required Sections:\n   ```yaml\n   scrape_configs:\n     - job_name: 'prometheus'\n       static_configs:\n         - targets: ['localhost:9090']\n     \n     - job_name: 'node-exporter'\n       static_configs:\n         - targets: ['node1:9100', 'node2:9100']\n       relabel_configs:\n         - source_labels: [__address__]\n           target_label: instance\n           regex: '([^:]+):\\d+'\n           replacement: '${1}'\n     \n     - job_name: 'kubernetes-pods'\n       metric_relabel_configs:\n         - source_labels: [__name__]\n           regex: 'go_.*'\n           action: drop\n   ```\n   \n   Relabeling Features to Demonstrate:\n   - source_labels and target_label\n   - regex matching and replacement\n   - metric_relabel_configs for metric filtering\n   - action: keep/drop/replace\n\n4. Test Cases (in config_test.go):\n   - Configuration parses without errors\n   - Job count matches expected (3 jobs)\n   - Relabeling rules applied in correct sequence\n   - Target labels transformed correctly\n   - metric_relabel_configs filtering works\n\n## Acceptance Criteria\n   - `go test ./config/...` passes all tests including new ones (exit 0)\n   - Configuration example is valid YAML\n   - Relabeling transformation results match expected values\n",
+      "/workspace/.skill_id": "prometheus-configuration"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "prometheus-configuration",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "human_skill_path": "upstream/skills/prometheus-configuration/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_prometheus_configuration.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Multi-Job Scrape Configuration Example for Prometheus\n\n## Background\n   Add a comprehensive scrape configuration example demonstrating multi-job\n   setup with relabeling rules, and add unit tests to verify configuration parsing.\n\n## Files to Create/Modify\n   - documentation/examples/multi-job-prometheus.yml - Configuration example\n   - config/config_test.go - Add parsing unit tests\n\n## Requirements\n   \n   Configuration Example (multi-job-prometheus.yml):\n   \n   Multiple Scrape Jobs:\n   1) prometheus (self-monitoring)\n   2) node-exporter (static_configs)\n   3) kubernetes-pods (with relabel_configs)\n   \n   Required Sections:\n   ```yaml\n   scrape_configs:\n     - job_name: 'prometheus'\n       static_configs:\n         - targets: ['localhost:9090']\n     \n     - job_name: 'node-exporter'\n       static_configs:\n         - targets: ['node1:9100', 'node2:9100']\n       relabel_configs:\n         - source_labels: [__address__]\n           target_label: instance\n           regex: '([^:]+):\\d+'\n           replacement: '${1}'\n     \n     - job_name: 'kubernetes-pods'\n       metric_relabel_configs:\n         - source_labels: [__name__]\n           regex: 'go_.*'\n           action: drop\n   ```\n   \n   Relabeling Features to Demonstrate:\n   - source_labels and target_label\n   - regex matching and replacement\n   - metric_relabel_configs for metric filtering\n   - action: keep/drop/replace\n\n4. Test Cases (in config_test.go):\n   - Configuration parses without errors\n   - Job count matches expected (3 jobs)\n   - Relabeling rules applied in correct sequence\n   - Target labels transformed correctly\n   - metric_relabel_configs filtering works\n\n## Acceptance Criteria\n   - `go test ./config/...` passes all tests including new ones (exit 0)\n   - Configuration example is valid YAML\n   - Relabeling transformation results match expected values\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "prometheus-configuration",
+    "name": "Prometheus Configuration",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "repo_url": "https://github.com/prometheus/prometheus",
+    "repo_commit": "df61021436e3aa53917a76ae8a4599d2c7fe6097",
+    "repo_root": "/workspace/prometheus",
+    "human_skill_path": "upstream/skills/prometheus-configuration/SKILL.md",
+    "sequence": 27
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create CMakeLists.txt build config",
+  "description": "CMake build file linking against QuantLib, cross-platform",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

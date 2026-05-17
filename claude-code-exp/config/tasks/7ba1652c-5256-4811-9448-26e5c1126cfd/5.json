@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Modernize strutils.py - comprehensions and generators",
+  "description": "Simplify comprehensions and use generator expressions where appropriate",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

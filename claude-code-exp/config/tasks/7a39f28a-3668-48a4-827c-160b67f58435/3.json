@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Validate config.yaml with otelcol validate",
+  "description": "Validate the config with otelcol validate",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

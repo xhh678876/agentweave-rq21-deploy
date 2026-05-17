@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create rag_config.yaml",
+  "description": "Create the configuration file with vector store, embedding, chunk size, and retriever settings",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

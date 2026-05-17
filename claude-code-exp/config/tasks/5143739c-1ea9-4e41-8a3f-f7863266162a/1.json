@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create src/metabase/api/alert.clj with Malli schema validation",
+  "description": "Implement the Alert API with Malli schema validation for POST /api/alert and PUT /api/alert/:id",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

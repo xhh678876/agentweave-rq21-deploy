@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Modernize iterutils.py - walrus operator",
+  "description": "Use walrus operator (:=) where it simplifies assignments in conditionals",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

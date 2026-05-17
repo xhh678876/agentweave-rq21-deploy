@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Add plugin_low_stock_alert to PluginsManager",
+  "description": "Modify saleor/plugins/manager.py to add plugin_low_stock_alert method following existing hook pattern",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

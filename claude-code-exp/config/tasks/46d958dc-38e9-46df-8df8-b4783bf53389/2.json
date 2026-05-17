@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Create WeightRecordRepository",
+  "description": "Create the Spring Data JPA repository for WeightRecord",
+  "activeForm": "Creating WeightRecord repository",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

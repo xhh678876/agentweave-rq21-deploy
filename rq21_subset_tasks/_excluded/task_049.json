@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_add_uint_support",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Enable Unsigned Integer Support for Target Operators\n\n## Background\n\nSeveral operators in PyTorch do not currently support unsigned integer types (uint16, uint32, uint64). When users attempt to perform calculations with these tensor types, the system returns an error stating that the type is not implemented.\n\nModify the underlying code so that the following operators can correctly process unsigned integer types.\n\n**Target Operators:**\n- `remainder`\n- `gcd`\n- `floor_divide`\n\n## Files to Modify\n\n- `aten/src/ATen/native/BinaryOps.cpp` - Add unsigned integer type dispatch\n- `aten/src/ATen/native/cpu/BinaryOpsKernel.cpp` - Add kernel implementations for unsigned types\n\n## Requirements\n\n- **Full Coverage**: Ensure `uint16`, `uint32`, and `uint64` are all supported for all three operators\n- **Standard Compliance**: Follow PyTorch's current recommended type dispatch patterns. Use the standard macro approach for groups of types rather than listing individual types manually\n- **Consistency**: Match the coding patterns already used by neighboring operators in the same files\n\n## Acceptance Criteria\n\n- The code compiles successfully\n- `uint16`, `uint32`, and `uint64` work correctly for `remainder`, `gcd`, and `floor_divide` operators\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-pytorch:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/.git ]; then cd /workspace && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_add_uint_support",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Enable Unsigned Integer Support for Target Operators\n\n## Background\n\nSeveral operators in PyTorch do not currently support unsigned integer types (uint16, uint32, uint64). When users attempt to perform calculations with these tensor types, the system returns an error stating that the type is not implemented.\n\nModify the underlying code so that the following operators can correctly process unsigned integer types.\n\n**Target Operators:**\n- `remainder`\n- `gcd`\n- `floor_divide`\n\n## Files to Modify\n\n- `aten/src/ATen/native/BinaryOps.cpp` - Add unsigned integer type dispatch\n- `aten/src/ATen/native/cpu/BinaryOpsKernel.cpp` - Add kernel implementations for unsigned types\n\n## Requirements\n\n- **Full Coverage**: Ensure `uint16`, `uint32`, and `uint64` are all supported for all three operators\n- **Standard Compliance**: Follow PyTorch's current recommended type dispatch patterns. Use the standard macro approach for groups of types rather than listing individual types manually\n- **Consistency**: Match the coding patterns already used by neighboring operators in the same files\n\n## Acceptance Criteria\n\n- The code compiles successfully\n- `uint16`, `uint32`, and `uint64` work correctly for `remainder`, `gcd`, and `floor_divide` operators\n",
+      "/workspace/.skill_id": "add-uint-support"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "add-uint-support",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-pytorch:latest",
+    "human_skill_path": "upstream/skills/add-uint-support/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_add_uint_support.py -v --tb=short",
+      "min_pass_rate": 0.5,
+      "timeout": 600
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Enable Unsigned Integer Support for Target Operators\n\n## Background\n\nSeveral operators in PyTorch do not currently support unsigned integer types (uint16, uint32, uint64). When users attempt to perform calculations with these tensor types, the system returns an error stating that the type is not implemented.\n\nModify the underlying code so that the following operators can correctly process unsigned integer types.\n\n**Target Operators:**\n- `remainder`\n- `gcd`\n- `floor_divide`\n\n## Files to Modify\n\n- `aten/src/ATen/native/BinaryOps.cpp` - Add unsigned integer type dispatch\n- `aten/src/ATen/native/cpu/BinaryOpsKernel.cpp` - Add kernel implementations for unsigned types\n\n## Requirements\n\n- **Full Coverage**: Ensure `uint16`, `uint32`, and `uint64` are all supported for all three operators\n- **Standard Compliance**: Follow PyTorch's current recommended type dispatch patterns. Use the standard macro approach for groups of types rather than listing individual types manually\n- **Consistency**: Match the coding patterns already used by neighboring operators in the same files\n\n## Acceptance Criteria\n\n- The code compiles successfully\n- `uint16`, `uint32`, and `uint64` work correctly for `remainder`, `gcd`, and `floor_divide` operators\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "add-uint-support",
+    "name": "Add UInt Support",
+    "type": "repair",
+    "description": "Restore uint32/uint64 operator support in PyTorch",
+    "base_image": "zhangyiiiiii/swe-skills-bench-pytorch:latest",
+    "repo_url": null,
+    "repo_commit": null,
+    "repo_root": "/workspace",
+    "human_skill_path": "upstream/skills/add-uint-support/SKILL.md",
+    "sequence": 49
+  }
+}

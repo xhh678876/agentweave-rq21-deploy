@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create docker-compose.yaml (optional)",
+  "description": "Create optional docker-compose.yaml for local setup",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

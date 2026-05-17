@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_gitops_workflow",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/flux2\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Flux GitOps Demo Configuration and Verification Script\n\n## Background\n   在 Flux CD 仓库中新增一个完整的 GitOps 配置示例，展示 Flux 部署清单和 Kustomize Overlay 结构，并编写一个验证脚本来检查配置的正确性。\n\n## Files to Create/Modify\n   - `hack/gitops-demo/clusters/dev/flux-system/gotk-components.yaml` (Flux bootstrap 组件)\n   - `hack/gitops-demo/clusters/dev/flux-system/kustomization.yaml` (Flux kustomization)\n   - `hack/gitops-demo/apps/base/deployment.yaml` (基础 Deployment)\n   - `hack/gitops-demo/apps/base/service.yaml` (基础 Service)\n   - `hack/gitops-demo/apps/base/kustomization.yaml` (基础 kustomization)\n   - `hack/gitops-demo/apps/overlays/dev/kustomization.yaml` (dev overlay)\n   - `hack/gitops-demo/apps/overlays/dev/patch-replicas.yaml` (replicas patch)\n   - `hack/verify-gitops-demo.sh` (验证脚本)\n\n## Requirements\n\n   ### 目录结构\n   ```\n   hack/\n   ├── gitops-demo/\n   │   ├── clusters/\n   │   │   └── dev/\n   │   │       └── flux-system/\n   │   │           ├── gotk-components.yaml\n   │   │           └── kustomization.yaml\n   │   └── apps/\n   │       ├── base/\n   │       │   ├── deployment.yaml\n   │       │   ├── service.yaml\n   │       │   └── kustomization.yaml\n   │       └── overlays/\n   │           └── dev/\n   │               ├── kustomization.yaml\n   │               └── patch-replicas.yaml\n   └── verify-gitops-demo.sh\n   ```\n\n   ### Kustomize 配置要求\n   - base/deployment.yaml: 包含完整的 Kubernetes Deployment (apiVersion, kind, metadata.name, spec.replicas, spec.template)\n   - base/service.yaml: 包含完整的 Kubernetes Service 暴露端口\n   - base/kustomization.yaml: 引用 deployment.yaml 和 service.yaml\n   - overlays/dev/kustomization.yaml: 基于 ../../base，应用 patch-replicas.yaml 补丁\n   - overlays/dev/patch-replicas.yaml: Strategic Merge Patch，将 replicas 修改为 dev 环境值\n\n   ### 验证脚本要求 (hack/verify-gitops-demo.sh)\n   - 脚本必须可执行 (`chmod +x`)\n   - 检查 `hack/gitops-demo/` 下所有必要文件存在\n   - 使用 `kustomize build hack/gitops-demo/apps/overlays/dev` 验证 Kustomize 构建成功\n   - 验证生成的 manifest 包含 Deployment 和 Service 资源\n   - 验证 overlay patch 已正确应用\n   - 所有检查通过时以退出码 0 退出，任何检查失败以非零退出码退出\n\n## Acceptance Criteria\n   - `kustomize build hack/gitops-demo/apps/overlays/dev` 退出码为 0\n   - 生成的 manifest 包含 deployment 和 service\n   - Overlay patches 正确应用\n   - `bash hack/verify-gitops-demo.sh` 退出码为 0\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/flux2/.git ]; then cd /workspace/flux2 && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_gitops_workflow",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Flux GitOps Demo Configuration and Verification Script\n\n## Background\n   在 Flux CD 仓库中新增一个完整的 GitOps 配置示例，展示 Flux 部署清单和 Kustomize Overlay 结构，并编写一个验证脚本来检查配置的正确性。\n\n## Files to Create/Modify\n   - `hack/gitops-demo/clusters/dev/flux-system/gotk-components.yaml` (Flux bootstrap 组件)\n   - `hack/gitops-demo/clusters/dev/flux-system/kustomization.yaml` (Flux kustomization)\n   - `hack/gitops-demo/apps/base/deployment.yaml` (基础 Deployment)\n   - `hack/gitops-demo/apps/base/service.yaml` (基础 Service)\n   - `hack/gitops-demo/apps/base/kustomization.yaml` (基础 kustomization)\n   - `hack/gitops-demo/apps/overlays/dev/kustomization.yaml` (dev overlay)\n   - `hack/gitops-demo/apps/overlays/dev/patch-replicas.yaml` (replicas patch)\n   - `hack/verify-gitops-demo.sh` (验证脚本)\n\n## Requirements\n\n   ### 目录结构\n   ```\n   hack/\n   ├── gitops-demo/\n   │   ├── clusters/\n   │   │   └── dev/\n   │   │       └── flux-system/\n   │   │           ├── gotk-components.yaml\n   │   │           └── kustomization.yaml\n   │   └── apps/\n   │       ├── base/\n   │       │   ├── deployment.yaml\n   │       │   ├── service.yaml\n   │       │   └── kustomization.yaml\n   │       └── overlays/\n   │           └── dev/\n   │               ├── kustomization.yaml\n   │               └── patch-replicas.yaml\n   └── verify-gitops-demo.sh\n   ```\n\n   ### Kustomize 配置要求\n   - base/deployment.yaml: 包含完整的 Kubernetes Deployment (apiVersion, kind, metadata.name, spec.replicas, spec.template)\n   - base/service.yaml: 包含完整的 Kubernetes Service 暴露端口\n   - base/kustomization.yaml: 引用 deployment.yaml 和 service.yaml\n   - overlays/dev/kustomization.yaml: 基于 ../../base，应用 patch-replicas.yaml 补丁\n   - overlays/dev/patch-replicas.yaml: Strategic Merge Patch，将 replicas 修改为 dev 环境值\n\n   ### 验证脚本要求 (hack/verify-gitops-demo.sh)\n   - 脚本必须可执行 (`chmod +x`)\n   - 检查 `hack/gitops-demo/` 下所有必要文件存在\n   - 使用 `kustomize build hack/gitops-demo/apps/overlays/dev` 验证 Kustomize 构建成功\n   - 验证生成的 manifest 包含 Deployment 和 Service 资源\n   - 验证 overlay patch 已正确应用\n   - 所有检查通过时以退出码 0 退出，任何检查失败以非零退出码退出\n\n## Acceptance Criteria\n   - `kustomize build hack/gitops-demo/apps/overlays/dev` 退出码为 0\n   - 生成的 manifest 包含 deployment 和 service\n   - Overlay patches 正确应用\n   - `bash hack/verify-gitops-demo.sh` 退出码为 0\n",
+      "/workspace/.skill_id": "gitops-workflow"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "gitops-workflow",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "human_skill_path": "upstream/skills/gitops-workflow/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_gitops_workflow.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 120
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Flux GitOps Demo Configuration and Verification Script\n\n## Background\n   在 Flux CD 仓库中新增一个完整的 GitOps 配置示例，展示 Flux 部署清单和 Kustomize Overlay 结构，并编写一个验证脚本来检查配置的正确性。\n\n## Files to Create/Modify\n   - `hack/gitops-demo/clusters/dev/flux-system/gotk-components.yaml` (Flux bootstrap 组件)\n   - `hack/gitops-demo/clusters/dev/flux-system/kustomization.yaml` (Flux kustomization)\n   - `hack/gitops-demo/apps/base/deployment.yaml` (基础 Deployment)\n   - `hack/gitops-demo/apps/base/service.yaml` (基础 Service)\n   - `hack/gitops-demo/apps/base/kustomization.yaml` (基础 kustomization)\n   - `hack/gitops-demo/apps/overlays/dev/kustomization.yaml` (dev overlay)\n   - `hack/gitops-demo/apps/overlays/dev/patch-replicas.yaml` (replicas patch)\n   - `hack/verify-gitops-demo.sh` (验证脚本)\n\n## Requirements\n\n   ### 目录结构\n   ```\n   hack/\n   ├── gitops-demo/\n   │   ├── clusters/\n   │   │   └── dev/\n   │   │       └── flux-system/\n   │   │           ├── gotk-components.yaml\n   │   │           └── kustomization.yaml\n   │   └── apps/\n   │       ├── base/\n   │       │   ├── deployment.yaml\n   │       │   ├── service.yaml\n   │       │   └── kustomization.yaml\n   │       └── overlays/\n   │           └── dev/\n   │               ├── kustomization.yaml\n   │               └── patch-replicas.yaml\n   └── verify-gitops-demo.sh\n   ```\n\n   ### Kustomize 配置要求\n   - base/deployment.yaml: 包含完整的 Kubernetes Deployment (apiVersion, kind, metadata.name, spec.replicas, spec.template)\n   - base/service.yaml: 包含完整的 Kubernetes Service 暴露端口\n   - base/kustomization.yaml: 引用 deployment.yaml 和 service.yaml\n   - overlays/dev/kustomization.yaml: 基于 ../../base，应用 patch-replicas.yaml 补丁\n   - overlays/dev/patch-replicas.yaml: Strategic Merge Patch，将 replicas 修改为 dev 环境值\n\n   ### 验证脚本要求 (hack/verify-gitops-demo.sh)\n   - 脚本必须可执行 (`chmod +x`)\n   - 检查 `hack/gitops-demo/` 下所有必要文件存在\n   - 使用 `kustomize build hack/gitops-demo/apps/overlays/dev` 验证 Kustomize 构建成功\n   - 验证生成的 manifest 包含 Deployment 和 Service 资源\n   - 验证 overlay patch 已正确应用\n   - 所有检查通过时以退出码 0 退出，任何检查失败以非零退出码退出\n\n## Acceptance Criteria\n   - `kustomize build hack/gitops-demo/apps/overlays/dev` 退出码为 0\n   - 生成的 manifest 包含 deployment 和 service\n   - Overlay patches 正确应用\n   - `bash hack/verify-gitops-demo.sh` 退出码为 0\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "gitops-workflow",
+    "name": "GitOps Workflow for Kubernetes",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "repo_url": "https://github.com/fluxcd/flux2",
+    "repo_commit": "d9f51d047dbb2e3184539ca40740f7b6f808f8d7",
+    "repo_root": "/workspace/flux2",
+    "human_skill_path": "upstream/skills/gitops-workflow/SKILL.md",
+    "sequence": 16
+  }
+}

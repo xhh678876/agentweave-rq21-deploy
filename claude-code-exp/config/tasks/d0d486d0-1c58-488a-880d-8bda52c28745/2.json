@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create examples/pipeline-demo/docker-compose.yaml",
+  "description": "Optional docker-compose file for local setup demonstrating the pipeline.",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

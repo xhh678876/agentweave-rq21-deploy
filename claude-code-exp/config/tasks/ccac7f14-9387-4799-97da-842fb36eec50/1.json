@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create prompt template files",
+  "description": "Create prompt templates for all required use cases (instruction, conversational, extraction, translation, code generation, evaluation)",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

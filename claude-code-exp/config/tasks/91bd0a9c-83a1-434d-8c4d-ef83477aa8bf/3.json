@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Write files to sandbox and verify compilation",
+  "description": "Copy all changed files to the sandbox directory for eval",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

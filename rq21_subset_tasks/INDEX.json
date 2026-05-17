@@ -1,0 +1,399 @@
+{
+  "schema_version": "1.0",
+  "total": 49,
+  "skipped": [],
+  "tasks": [
+    {
+      "id": "swe_skills_add_admin_api_endpoint",
+      "skill_id": "add-admin-api-endpoint",
+      "path": "tasks/task_001.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_add_malli_schemas",
+      "skill_id": "add-malli-schemas",
+      "path": "tasks/task_002.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-clojure:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_analytics_events",
+      "skill_id": "analytics-events",
+      "path": "tasks/task_003.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_analyze_ci",
+      "skill_id": "analyze-ci",
+      "path": "tasks/task_004.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_bash_defensive_patterns",
+      "skill_id": "bash-defensive-patterns",
+      "path": "tasks/task_005.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_bazel_build_optimization",
+      "skill_id": "bazel-build-optimization",
+      "path": "tasks/task_006.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-bazel:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_changelog_automation",
+      "skill_id": "changelog-automation",
+      "path": "tasks/task_007.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_clojure_write",
+      "skill_id": "clojure-write",
+      "path": "tasks/task_008.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-clojure:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_creating_financial_models",
+      "skill_id": "creating-financial-models",
+      "path": "tasks/task_009.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_dbt_transformation_patterns",
+      "skill_id": "dbt-transformation-patterns",
+      "path": "tasks/task_010.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_distributed_tracing",
+      "skill_id": "distributed-tracing",
+      "path": "tasks/task_011.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_django_patterns",
+      "skill_id": "django-patterns",
+      "path": "tasks/task_012.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_fix",
+      "skill_id": "fix",
+      "path": "tasks/task_013.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_github_actions_templates",
+      "skill_id": "github-actions-templates",
+      "path": "tasks/task_014.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_gitlab_ci_patterns",
+      "skill_id": "gitlab-ci-patterns",
+      "path": "tasks/task_015.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-ruby:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_gitops_workflow",
+      "skill_id": "gitops-workflow",
+      "path": "tasks/task_016.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_grafana_dashboards",
+      "skill_id": "grafana-dashboards",
+      "path": "tasks/task_017.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_implementing_agent_modes",
+      "skill_id": "implementing-agent-modes",
+      "path": "tasks/task_018.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_implementing_jsc_classes_zig",
+      "skill_id": "implementing-jsc-classes-zig",
+      "path": "tasks/task_019.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_istio_traffic_management",
+      "skill_id": "istio-traffic-management",
+      "path": "tasks/task_020.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_k8s_manifest_generator",
+      "skill_id": "k8s-manifest-generator",
+      "path": "tasks/task_021.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_langsmith_fetch",
+      "skill_id": "langsmith-fetch",
+      "path": "tasks/task_022.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_linkerd_patterns",
+      "skill_id": "linkerd-patterns",
+      "path": "tasks/task_023.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_llm_evaluation",
+      "skill_id": "llm-evaluation",
+      "path": "tasks/task_024.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_mcp_builder",
+      "skill_id": "mcp-builder",
+      "path": "tasks/task_025.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_nx_workspace_patterns",
+      "skill_id": "nx-workspace-patterns",
+      "path": "tasks/task_026.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_prometheus_configuration",
+      "skill_id": "prometheus-configuration",
+      "path": "tasks/task_027.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_prompt_engineering_patterns",
+      "skill_id": "prompt-engineering-patterns",
+      "path": "tasks/task_028.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_anti_patterns",
+      "skill_id": "python-anti-patterns",
+      "path": "tasks/task_029.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_background_jobs",
+      "skill_id": "python-background-jobs",
+      "path": "tasks/task_030.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_configuration",
+      "skill_id": "python-configuration",
+      "path": "tasks/task_031.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_observability",
+      "skill_id": "python-observability",
+      "path": "tasks/task_032.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_packaging",
+      "skill_id": "python-packaging",
+      "path": "tasks/task_033.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_performance_optimization",
+      "skill_id": "python-performance-optimization",
+      "path": "tasks/task_034.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-rust:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_python_resilience",
+      "skill_id": "python-resilience",
+      "path": "tasks/task_035.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_rag_implementation",
+      "skill_id": "rag-implementation",
+      "path": "tasks/task_036.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_risk_metrics_calculation",
+      "skill_id": "risk-metrics-calculation",
+      "path": "tasks/task_037.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_security_review",
+      "skill_id": "security-review",
+      "path": "tasks/task_038.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_service_mesh_observability",
+      "skill_id": "service-mesh-observability",
+      "path": "tasks/task_039.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_similarity_search_patterns",
+      "skill_id": "similarity-search-patterns",
+      "path": "tasks/task_040.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_slo_implementation",
+      "skill_id": "slo-implementation",
+      "path": "tasks/task_041.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_spark_optimization",
+      "skill_id": "spark-optimization",
+      "path": "tasks/task_042.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-jvm:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_springboot_tdd",
+      "skill_id": "springboot-tdd",
+      "path": "tasks/task_043.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-jvm:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_tdd_workflow",
+      "skill_id": "tdd-workflow",
+      "path": "tasks/task_044.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_turborepo",
+      "skill_id": "turborepo",
+      "path": "tasks/task_045.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_v3_performance_optimization",
+      "skill_id": "v3-performance-optimization",
+      "path": "tasks/task_046.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_vector_index_tuning",
+      "skill_id": "vector-index-tuning",
+      "path": "tasks/task_047.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_xlsx",
+      "skill_id": "xlsx",
+      "path": "tasks/task_048.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    },
+    {
+      "id": "swe_skills_add_uint_support",
+      "skill_id": "add-uint-support",
+      "path": "tasks/task_049.json",
+      "docker_image": "zhangyiiiiii/swe-skills-bench-pytorch:latest",
+      "has_human_skill": true,
+      "evaluation_method": "unit_test"
+    }
+  ]
+}

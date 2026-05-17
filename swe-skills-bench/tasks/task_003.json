@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_analytics_events",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/metabase\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Add Frontend Analytics Event Definitions for Metabase\n\n## Background\n\nWe need to define and implement key user behavior analytics events for Metabase's frontend, enabling better understanding of user interactions.\n\n## Files to Create/Modify\n\n- `frontend/src/metabase/lib/analytics.ts` - Event definitions and types\n- `frontend/test/metabase/lib/analytics.test.ts` - Unit tests\n\n## Requirements\n\n### Event Definitions (2-3 key events)\n\n**1. dashboard_viewed**\n- Payload: `dashboard_id`, `view_duration_ms`, `card_count`\n\n**2. question_saved**\n- Payload: `question_id`, `question_type`, `database_id`, `save_duration_ms`\n\n**3. filter_applied**\n- Payload: `dashboard_id`, `filter_type`, `filter_value_count`\n\n### Event Interface\n\n```typescript\ninterface AnalyticsEvent {\n  event_name: string;\n  payload: Record<string, unknown>;\n  timestamp: number;\n}\n```\n\n### Naming Convention\n\n- Use `snake_case` for event names and payload field names\n- Include TypeScript type definitions for each event payload\n\n### Expected Functionality\n\n- Event triggers produce correct payload structure\n- All required fields are present in each payload\n- Field names follow `snake_case` convention consistently\n- Timestamps are valid Unix timestamps\n- Payloads conform to their TypeScript type definitions\n\n## Acceptance Criteria\n\n- Event definitions have proper TypeScript types\n- Payload fields are complete and correctly named\n- Implementation follows naming conventions\n- Code compiles without type errors\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/metabase/.git ]; then cd /workspace/metabase && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_analytics_events",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Add Frontend Analytics Event Definitions for Metabase\n\n## Background\n\nWe need to define and implement key user behavior analytics events for Metabase's frontend, enabling better understanding of user interactions.\n\n## Files to Create/Modify\n\n- `frontend/src/metabase/lib/analytics.ts` - Event definitions and types\n- `frontend/test/metabase/lib/analytics.test.ts` - Unit tests\n\n## Requirements\n\n### Event Definitions (2-3 key events)\n\n**1. dashboard_viewed**\n- Payload: `dashboard_id`, `view_duration_ms`, `card_count`\n\n**2. question_saved**\n- Payload: `question_id`, `question_type`, `database_id`, `save_duration_ms`\n\n**3. filter_applied**\n- Payload: `dashboard_id`, `filter_type`, `filter_value_count`\n\n### Event Interface\n\n```typescript\ninterface AnalyticsEvent {\n  event_name: string;\n  payload: Record<string, unknown>;\n  timestamp: number;\n}\n```\n\n### Naming Convention\n\n- Use `snake_case` for event names and payload field names\n- Include TypeScript type definitions for each event payload\n\n### Expected Functionality\n\n- Event triggers produce correct payload structure\n- All required fields are present in each payload\n- Field names follow `snake_case` convention consistently\n- Timestamps are valid Unix timestamps\n- Payloads conform to their TypeScript type definitions\n\n## Acceptance Criteria\n\n- Event definitions have proper TypeScript types\n- Payload fields are complete and correctly named\n- Implementation follows naming conventions\n- Code compiles without type errors\n",
+      "/workspace/.skill_id": "analytics-events"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "analytics-events",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "human_skill_path": "upstream/skills/analytics-events/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_analytics_events.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 300
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Add Frontend Analytics Event Definitions for Metabase\n\n## Background\n\nWe need to define and implement key user behavior analytics events for Metabase's frontend, enabling better understanding of user interactions.\n\n## Files to Create/Modify\n\n- `frontend/src/metabase/lib/analytics.ts` - Event definitions and types\n- `frontend/test/metabase/lib/analytics.test.ts` - Unit tests\n\n## Requirements\n\n### Event Definitions (2-3 key events)\n\n**1. dashboard_viewed**\n- Payload: `dashboard_id`, `view_duration_ms`, `card_count`\n\n**2. question_saved**\n- Payload: `question_id`, `question_type`, `database_id`, `save_duration_ms`\n\n**3. filter_applied**\n- Payload: `dashboard_id`, `filter_type`, `filter_value_count`\n\n### Event Interface\n\n```typescript\ninterface AnalyticsEvent {\n  event_name: string;\n  payload: Record<string, unknown>;\n  timestamp: number;\n}\n```\n\n### Naming Convention\n\n- Use `snake_case` for event names and payload field names\n- Include TypeScript type definitions for each event payload\n\n### Expected Functionality\n\n- Event triggers produce correct payload structure\n- All required fields are present in each payload\n- Field names follow `snake_case` convention consistently\n- Timestamps are valid Unix timestamps\n- Payloads conform to their TypeScript type definitions\n\n## Acceptance Criteria\n\n- Event definitions have proper TypeScript types\n- Payload fields are complete and correctly named\n- Implementation follows naming conventions\n- Code compiles without type errors\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "analytics-events",
+    "name": "Metabase Frontend Analytics Events",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-python:latest",
+    "repo_url": "https://github.com/metabase/metabase",
+    "repo_commit": "d8bb291939a60c44d8ba6eb7bb132a5e0f271cf1",
+    "repo_root": "/workspace/metabase",
+    "human_skill_path": "upstream/skills/analytics-events/SKILL.md",
+    "sequence": 3
+  }
+}

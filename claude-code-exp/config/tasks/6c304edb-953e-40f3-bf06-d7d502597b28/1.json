@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create directory structure for Metabase currency formatter",
+  "description": "Create src/metabase/query_processor/middleware/ and test/metabase/query_processor/middleware/ directories",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

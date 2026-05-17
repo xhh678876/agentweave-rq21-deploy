@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create rag_demo.py",
+  "description": "Create the main RAG demo script with data loading, splitting, vector store, retrieval QA chain, source citations",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

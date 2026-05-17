@@ -1,0 +1,9 @@
+{
+  "id": "2",
+  "subject": "Fix all ESLint violations",
+  "description": "Fix all ESLint error-level violations: no-unused-vars, @typescript-eslint/no-explicit-any, eqeqeq in src/**/*.ts files",
+  "activeForm": "Fixing ESLint violations in src/",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

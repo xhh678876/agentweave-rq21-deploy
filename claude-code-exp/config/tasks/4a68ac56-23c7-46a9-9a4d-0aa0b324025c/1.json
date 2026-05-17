@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create migration for audit_logs table",
+  "description": "Create a migration file to add the audit_logs table and permissions",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

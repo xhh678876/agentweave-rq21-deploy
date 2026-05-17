@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create root package.json and turbo.json",
+  "description": "Create the root configuration files with workspace settings and pipeline configuration",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create similarity_search_demo.py demo script",
+  "description": "Create Milvus similarity search demo: create collection with schema, build index (IVF_FLAT or HNSW), insert test vectors, execute similarity queries, output Top-K results with latency and parameter logging",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

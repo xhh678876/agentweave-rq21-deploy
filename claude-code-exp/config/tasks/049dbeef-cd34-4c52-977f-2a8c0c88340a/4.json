@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Create notebooks/risk_metrics.ipynb (optional)",
+  "description": "Optional Jupyter notebook for risk metrics visualization",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

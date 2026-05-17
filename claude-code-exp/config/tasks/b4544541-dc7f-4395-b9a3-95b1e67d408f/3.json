@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create WeightRecord entity",
+  "description": "WeightRecord.java entity with id, petId, weightKg, recordDate fields",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

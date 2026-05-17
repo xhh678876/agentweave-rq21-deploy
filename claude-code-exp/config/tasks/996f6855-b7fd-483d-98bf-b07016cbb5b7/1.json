@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Add low_stock_threshold field to Stock model",
+  "description": "Modify saleor/warehouse/models.py to add low_stock_threshold IntegerField(default=10) to the Stock model",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

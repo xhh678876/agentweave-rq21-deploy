@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Add multi-job config parsing tests to config_test.go",
+  "description": "Add tests for parsing the multi-job config: verify it parses without error, job count is 3, relabel rules are in correct sequence, target labels transform correctly, and metric_relabel_configs filtering works",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

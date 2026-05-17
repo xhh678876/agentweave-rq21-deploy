@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create e2e test file for audit-logs",
+  "description": "Create audit-logs.test.js with tests for browse, read, pagination, and auth",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create test_version_edge_cases.py",
+  "description": "Create tests/test_version_edge_cases.py with comprehensive edge case tests for packaging version parsing",
+  "activeForm": "Creating version edge case tests",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

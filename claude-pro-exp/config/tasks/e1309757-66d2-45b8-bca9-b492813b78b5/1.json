@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create sample documents for RAG demo",
+  "description": "Create sample text documents about AI/ML topics in examples/data/ for the RAG pipeline to load and process",
+  "activeForm": "Creating sample documents",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

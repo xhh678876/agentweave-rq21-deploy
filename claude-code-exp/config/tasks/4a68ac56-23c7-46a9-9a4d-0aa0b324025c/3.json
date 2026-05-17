@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Register audit-logs in API index, model index, routes, and fixtures",
+  "description": "Register the new endpoint and model in all required locations",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

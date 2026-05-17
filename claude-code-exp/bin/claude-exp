@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Claude Code 实验专属 wrapper
+# 用法: claude-exp [任何 claude 参数]
+#
+# 它做了什么：
+#   1. 把 CLAUDE_CONFIG_DIR 指向实验配置目录（隔离日常 ~/.claude/）
+#   2. 加载实验 .env：ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+#   3. 模型锁定为 deepseek-v4-flash
+#   4. 调用本地 node_modules 里的 claude（不是日常那只）
+#
+# 它没动什么：
+#   - /usr/local/bin/claude 或日常 PATH 里的 claude
+#   - ~/.claude/（你的日常配置）
+
+set -euo pipefail
+
+HARNESS_DIR="$HOME/agentweave/claude-code-exp"
+
+# 加载实验 .env
+if [ -f "$HARNESS_DIR/config/.env" ]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$HARNESS_DIR/config/.env"
+  set +a
+fi
+
+# 隔离配置目录
+export CLAUDE_CONFIG_DIR="$HARNESS_DIR/config"
+
+# 调用本地 claude
+exec "$HARNESS_DIR/node_modules/.bin/claude" "$@"

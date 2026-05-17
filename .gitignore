@@ -1,0 +1,41 @@
+# 大目录 / 重新安装的
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/*.pyc
+**/runs/
+**/cache/
+**/backups/
+
+# Hermes upstream（建议服务器从官方 repo clone）
+hermes-exp/upstream/
+
+# Sessions / 历史
+**/session-env/
+**/sessions/
+**/projects/
+**/projects-v2/
+**/file-history/
+**/shell-snapshots/
+**/telemetry/
+**/heap-dumps/
+**/history.jsonl
+
+# 备份文件
+*.bak
+*.backup
+*.tar.gz
+
+# Secrets (双保险 — 已经 sanitize 过)
+**/auth.json
+**/credentials.json
+*.pem
+*.key
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+

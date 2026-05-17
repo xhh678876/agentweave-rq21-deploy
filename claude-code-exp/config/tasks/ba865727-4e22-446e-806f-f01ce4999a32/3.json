@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create tcp_metrics_demo.go example",
+  "description": "Create viz/metrics-api/examples/tcp_metrics_demo.go with TCP metrics collection demo using Prometheus client library, registering tcp_open_total, tcp_close_total, tcp_connection_duration_ms, tcp_read_bytes_total, tcp_write_bytes_total, simulating connection lifecycle and exposing via HTTP.",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

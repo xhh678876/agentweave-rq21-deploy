@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create tests/functional/staging/test_stg_orders.py",
+  "description": "Create test_stg_orders.py that verifies model compilation, schema, and custom test",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

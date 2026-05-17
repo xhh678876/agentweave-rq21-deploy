@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create warehouse/signals.py with post_save handler and caching",
+  "description": "Create saleor/warehouse/signals.py with post_save signal on Stock, cache dedup with 300s TTL, and plugin_low_stock_alert call",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

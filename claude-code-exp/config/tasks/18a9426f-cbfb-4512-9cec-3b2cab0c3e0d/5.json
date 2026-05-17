@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Verify compilation with ./mvnw compile",
+  "description": "Run Maven compile to verify everything works",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

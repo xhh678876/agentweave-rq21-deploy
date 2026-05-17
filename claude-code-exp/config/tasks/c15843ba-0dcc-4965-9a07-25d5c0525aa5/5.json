@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Also create DAST.gitlab-ci.yml if needed",
+  "description": "The test file checks for DAST.gitlab-ci.yml, so we may need to create it too",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

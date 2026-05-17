@@ -1,0 +1,8 @@
+{
+  "id": "5",
+  "subject": "Create WeightRecordRepository interface",
+  "description": "Create JPA repository with findByPetIdOrderByRecordDateDesc method",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

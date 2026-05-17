@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create src/BUILD.bazel and src/main.py",
+  "description": "Create py_binary target and sample Python code in examples/python-bazel/src/",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Fix Secret-Detection.gitlab-ci.yml with proper extends and rules",
+  "description": "Add missing extends and rules fields to lib/gitlab/ci/templates/Security/Secret-Detection.gitlab-ci.yml",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

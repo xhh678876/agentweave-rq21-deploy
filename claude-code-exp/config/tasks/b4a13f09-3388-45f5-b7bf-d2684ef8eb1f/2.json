@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create similarity_search_demo.py",
+  "description": "Demo script: create collection, build IVF_FLAT index, insert vectors, execute similarity queries, verify neighbors, log latency and parameters",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

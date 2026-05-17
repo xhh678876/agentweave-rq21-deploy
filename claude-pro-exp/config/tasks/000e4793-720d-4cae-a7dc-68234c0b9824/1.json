@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "subject": "Create similarity search demo for Milvus",
+  "description": "Create examples/similarity_search_demo.py, examples/test_vectors.json, and benchmarks/similarity_benchmark.py with proper schema, index building, vector insertion, query operations, and validation",
+  "activeForm": "Creating similarity search demo files",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

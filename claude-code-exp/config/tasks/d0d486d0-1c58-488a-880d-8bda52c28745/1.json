@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Create examples/pipeline-demo/README.md",
+  "description": "Documentation explaining each pipeline component, configuration features, and usage instructions.",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

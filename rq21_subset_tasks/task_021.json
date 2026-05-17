@@ -1,0 +1,140 @@
+{
+  "id": "swe_skills_k8s_manifest_generator",
+  "category": "swe_skills_bench",
+  "difficulty": "hard",
+  "goal": "You are working on a real-world software engineering task from SWE-Skills-Bench.\n\nThe task description, target files, requirements, and acceptance criteria are stored at /workspace/TASK.md inside your Docker workspace. Read it first with read_file_real.\n\nThe source tree is available at: /workspace/kustomize\n\nInspect the repository with shell_exec_in_workspace and read_file_real. Make changes with apply_patch when possible, or write_file_real when replacing a whole file. Use absolute paths for file tools.\n\nAfter you finish, respond with TASK_COMPLETE.\n\n--- TASK BRIEF (excerpt) ---\n# Task: Create Multi-Environment Kustomize Overlay Example\n\n## Background\n   Add a comprehensive\n   multi-environment overlay example to the Kustomize repository demonstrating\n   production-ready configuration management patterns.\n\n## Files to Create/Modify\n   - examples/multi-env/base/deployment.yaml (base deployment)\n   - examples/multi-env/base/service.yaml (base service)\n   - examples/multi-env/base/kustomization.yaml (base kustomization)\n   - examples/multi-env/overlays/dev/kustomization.yaml (dev overlay)\n   - examples/multi-env/overlays/staging/kustomization.yaml (staging overlay)\n   - examples/multi-env/overlays/production/kustomization.yaml (prod overlay)\n\n## Requirements\n   \n   Base Configuration:\n   - Deployment with configurable replicas\n   - Service exposing the deployment\n   - ConfigMap for application settings\n   - Resource limits and requests\n   \n   Overlay Features:\n   - Dev: single replica, debug logging, no resource limits\n   - Staging: 2 replicas, info logging, moderate resources\n   - Production: 3 replicas, warning logging, high resources, HPA\n   \n   Kustomize Patterns to Demonstrate:\n   - patches (strategic merge and JSON)\n   - configMapGenerator\n   - commonLabels and commonAnnotations\n   - namespace transformation\n   - images transformer\n\n4. Validation Commands:\n   - `kustomize build examples/multi-env/overlays/dev`\n   - `kustomize build examples/multi-env/overlays/production`\n\n## Acceptance Criteria\n   - `kustomize build examples/multi-env/overlays/production` exits with code 0\n   - Generated manifests include all required resources\n   - Each environment has appropriate configuration differences\n--- END BRIEF ---\n",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file_real",
+        "description": "Read a file from the live Docker workspace. Read /workspace/TASK.md first.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file_real",
+        "description": "Write or overwrite a file in the live Docker workspace. Use absolute paths rooted at /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "content"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "shell_exec_in_workspace",
+        "description": "Run a shell command in the live Docker workspace and return stdout plus stderr.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30
+            }
+          },
+          "required": [
+            "command"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_patch",
+        "description": "Apply a unified diff to the repository in the Docker workspace using patch -p1 from /workspace.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "diff": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "diff"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "workspace": {
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "mount_workspace": "/workspace",
+    "setup_command": "if [ -d /workspace/kustomize/.git ]; then cd /workspace/kustomize && git checkout HEAD -- . && git clean -fd; fi"
+  },
+  "initial_state": {
+    "task_id": "swe_skills_k8s_manifest_generator",
+    "category": "swe_skills_bench",
+    "files": {
+      "/workspace/TASK.md": "# Task: Create Multi-Environment Kustomize Overlay Example\n\n## Background\n   Add a comprehensive\n   multi-environment overlay example to the Kustomize repository demonstrating\n   production-ready configuration management patterns.\n\n## Files to Create/Modify\n   - examples/multi-env/base/deployment.yaml (base deployment)\n   - examples/multi-env/base/service.yaml (base service)\n   - examples/multi-env/base/kustomization.yaml (base kustomization)\n   - examples/multi-env/overlays/dev/kustomization.yaml (dev overlay)\n   - examples/multi-env/overlays/staging/kustomization.yaml (staging overlay)\n   - examples/multi-env/overlays/production/kustomization.yaml (prod overlay)\n\n## Requirements\n   \n   Base Configuration:\n   - Deployment with configurable replicas\n   - Service exposing the deployment\n   - ConfigMap for application settings\n   - Resource limits and requests\n   \n   Overlay Features:\n   - Dev: single replica, debug logging, no resource limits\n   - Staging: 2 replicas, info logging, moderate resources\n   - Production: 3 replicas, warning logging, high resources, HPA\n   \n   Kustomize Patterns to Demonstrate:\n   - patches (strategic merge and JSON)\n   - configMapGenerator\n   - commonLabels and commonAnnotations\n   - namespace transformation\n   - images transformer\n\n4. Validation Commands:\n   - `kustomize build examples/multi-env/overlays/dev`\n   - `kustomize build examples/multi-env/overlays/production`\n\n## Acceptance Criteria\n   - `kustomize build examples/multi-env/overlays/production` exits with code 0\n   - Generated manifests include all required resources\n   - Each environment has appropriate configuration differences\n",
+      "/workspace/.skill_id": "k8s-manifest-generator"
+    }
+  },
+  "verification": {
+    "type": "swe_skills_docker_test",
+    "skill_id": "k8s-manifest-generator",
+    "docker_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "human_skill_path": "upstream/skills/k8s-manifest-generator/SKILL.md",
+    "evaluation": {
+      "method": "unit_test",
+      "command": "python -m pytest /workspace/tests/test_k8s_manifest_generator.py -v --tb=short",
+      "min_pass_rate": 1.0,
+      "timeout": 60
+    },
+    "expected": {
+      "files": {
+        "/workspace/TASK.md": "# Task: Create Multi-Environment Kustomize Overlay Example\n\n## Background\n   Add a comprehensive\n   multi-environment overlay example to the Kustomize repository demonstrating\n   production-ready configuration management patterns.\n\n## Files to Create/Modify\n   - examples/multi-env/base/deployment.yaml (base deployment)\n   - examples/multi-env/base/service.yaml (base service)\n   - examples/multi-env/base/kustomization.yaml (base kustomization)\n   - examples/multi-env/overlays/dev/kustomization.yaml (dev overlay)\n   - examples/multi-env/overlays/staging/kustomization.yaml (staging overlay)\n   - examples/multi-env/overlays/production/kustomization.yaml (prod overlay)\n\n## Requirements\n   \n   Base Configuration:\n   - Deployment with configurable replicas\n   - Service exposing the deployment\n   - ConfigMap for application settings\n   - Resource limits and requests\n   \n   Overlay Features:\n   - Dev: single replica, debug logging, no resource limits\n   - Staging: 2 replicas, info logging, moderate resources\n   - Production: 3 replicas, warning logging, high resources, HPA\n   \n   Kustomize Patterns to Demonstrate:\n   - patches (strategic merge and JSON)\n   - configMapGenerator\n   - commonLabels and commonAnnotations\n   - namespace transformation\n   - images transformer\n\n4. Validation Commands:\n   - `kustomize build examples/multi-env/overlays/dev`\n   - `kustomize build examples/multi-env/overlays/production`\n\n## Acceptance Criteria\n   - `kustomize build examples/multi-env/overlays/production` exits with code 0\n   - Generated manifests include all required resources\n   - Each environment has appropriate configuration differences\n"
+      }
+    }
+  },
+  "oracle_metrics": {
+    "min_steps": 3,
+    "max_reasonable_steps": 20,
+    "expected_input_tokens": 8000,
+    "expected_output_tokens": 4000
+  },
+  "swe_skills_meta": {
+    "skill_id": "k8s-manifest-generator",
+    "name": "Kubernetes Manifest Generator",
+    "type": "feature",
+    "description": "See task file for detailed mission requirements.",
+    "base_image": "zhangyiiiiii/swe-skills-bench-golang:latest",
+    "repo_url": "https://github.com/kubernetes-sigs/kustomize",
+    "repo_commit": "29bf16c673061f95dedeb502f5700cedc9cfe1f8",
+    "repo_root": "/workspace/kustomize",
+    "human_skill_path": "upstream/skills/k8s-manifest-generator/SKILL.md",
+    "sequence": 21
+  }
+}

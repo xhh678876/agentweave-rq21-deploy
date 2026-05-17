@@ -1,0 +1,8 @@
+{
+  "id": "2",
+  "subject": "Create tests/BUILD.bazel and tests/main_test.py",
+  "description": "Create py_test target and test code",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

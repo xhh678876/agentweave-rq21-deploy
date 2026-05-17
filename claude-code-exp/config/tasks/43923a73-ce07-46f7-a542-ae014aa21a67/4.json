@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Test and verify the RAG demo",
+  "description": "Run python examples/rag_demo.py and verify exit code 0, context snippets in output, source citations present",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Verify compilation",
+  "description": "Run ./mvnw compile to verify the application compiles",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

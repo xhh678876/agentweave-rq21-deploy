@@ -1,0 +1,8 @@
+{
+  "id": "3",
+  "subject": "Create workspace packages (core, utils, app)",
+  "description": "Create package.json, tsconfig.json, and src/index.ts for each package",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}

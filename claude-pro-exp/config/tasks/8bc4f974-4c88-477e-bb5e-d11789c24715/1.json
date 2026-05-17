@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "subject": "Verify audit-logs API implementation completeness",
+  "description": "Check 4 files (endpoint, model, routes, test) for correctness against requirements. Identify gaps and fix them.",
+  "status": "in_progress",
+  "blocks": [],
+  "blockedBy": []
+}

@@ -1,0 +1,1 @@
+2026-05-17 00:49:54,613 ERROR [20260517_004953_4c52a0] root: Non-retryable client error: Error code: 401 - {'error': {'message': 'Missing Authentication header', 'code': 401}}

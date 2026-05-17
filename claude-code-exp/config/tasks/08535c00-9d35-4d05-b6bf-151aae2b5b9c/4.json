@@ -1,0 +1,8 @@
+{
+  "id": "4",
+  "subject": "Register model and endpoint in index files and add routes",
+  "description": "Register audit-log model in models/index.js, register audit-logs endpoint in api/endpoints/index.js, add routes to admin/routes.js, add mapper and test utils",
+  "status": "completed",
+  "blocks": [],
+  "blockedBy": []
+}
